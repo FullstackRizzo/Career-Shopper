@@ -1,7 +1,7 @@
 {
-  "name": "fs-app-template",
+  "name": "career-shopper",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "A shopping website for figuring out your potential career path",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -17,7 +17,7 @@
     "test:dev:models": "npm run test:dev -- --grep=model",
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Team Rizzo",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
+    "prettier": "^2.8.4",
     "sequelize": "^6.25.3"
   },
   "devDependencies": {
