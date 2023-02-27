@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 /**
  * COMPONENT
  */
-const Home = (props) => {
+const Account = (props) => {
   const username = useSelector((state) => state.auth.me.username);
 
   return (
@@ -14,4 +14,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Account;
