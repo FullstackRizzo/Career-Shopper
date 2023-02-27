@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Account from '../features/account/Account';
+import Homepage from '../features/homepage/Homepage';
 import { me } from './store';
 
 /**
@@ -38,6 +39,7 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route path = '/' element = {<Homepage/>}/>
         </Routes>
       )}
     </div>
