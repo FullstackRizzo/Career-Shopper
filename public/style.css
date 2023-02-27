@@ -3,6 +3,7 @@ body {
 }
 
 a {
+  color: black;
   text-decoration: none;
 }
 
@@ -12,7 +13,7 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
+  /* margin: 1em; */
 }
 
 form div {
@@ -23,10 +24,75 @@ form div {
 
 /* Non-template CSS, names here will likely need to change */
 
+/*Start working space*/
+
+/* * {
+  transition: opacity 0.4s;
+} */
+
 .navbar-menu {
-  color: ;
-  background-color: ;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: #B4B4B4;
 }
+
+#hamburgerLinks {
+  display: none;
+  /* opacity: 0; */
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #7A7A7A;
+  width: 10vw;
+  height: 70vh;
+}
+
+#hamburgerLinksTopSection, #hamburgerLinksBottomSection {
+  display: flex;
+  flex-direction: column;
+}
+
+#hamburgerLinksTopSection {
+  font-size: 20px;
+}
+
+
+#hamburgerLinksBottomSection {
+  font-size: 15px;
+  text-align: center;
+}
+
+#hamburgerLinks a {
+  padding: 15px 20px;
+  color: white;
+}
+
+.navbar-menu a {
+  padding: 1em;
+  text-decoration: none;
+}
+
+.navbar-menu a.icon {
+  display: block;
+}
+
+.navbar-menu a:hover, #hamburgerLinks a:hover {
+  /*Change these hover colors*/
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  /*This may be unneeded*/
+  background-color: #04AA6D;
+  color: white;
+}
+
+/*End working space*/
+
+
 
 .navbar-link {
   color: ;
@@ -40,6 +106,7 @@ form div {
 .dropdown-link {
   color: ;
 }
+
 
 .header-text {
   color: ;
@@ -67,4 +134,53 @@ form div {
 .button:hover {
   color: ;
   background-color: ;
+}
+
+.form-nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-nav-container a{
+  text-decoration: underline;
+  padding-left: 20px;
+}
+
+#form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#form div{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#form input{
+  height: 25px;
+  width: 75%;
+}
+
+#form button{
+  height: 60px;
+  width: 25%;
+  background-color: #00C80D;
+  border-width: 0;
+}
+
+#homepage-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#homepage-container p{
+  text-align: center;
 }
