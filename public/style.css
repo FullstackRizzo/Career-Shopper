@@ -19,3 +19,52 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+
+/* Non-template CSS, names here will likely need to change */
+
+.navbar-menu {
+  color: ;
+  background-color: ;
+}
+
+.navbar-link {
+  color: ;
+}
+
+.dropdown-menu {
+  color: ;
+  background-color: ;
+}
+
+.dropdown-link {
+  color: ;
+}
+
+.header-text {
+  color: ;
+}
+
+.common-text {
+  color: ;
+}
+
+.link-text {
+  color: ;
+  background-color: ;
+}
+
+.link-text:hover {
+  color: ;
+  background-color: ;
+}
+
+.button {
+  color: ;
+  background-color: ;
+}
+
+.button:hover {
+  color: ;
+  background-color: ;
+}
