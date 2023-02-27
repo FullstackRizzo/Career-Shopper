@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Homepage = () =>{
+    const isLoggedIn = useSelector((state) => !!state.auth.me.id);
     return(
         <div id = 'homepage-container'>
             <h1>LOOKING FOR A CAREER?</h1>
