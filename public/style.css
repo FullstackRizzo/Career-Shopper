@@ -135,3 +135,52 @@ form div {
   color: ;
   background-color: ;
 }
+
+.form-nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-nav-container a{
+  text-decoration: underline;
+  padding-left: 20px;
+}
+
+#form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#form div{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#form input{
+  height: 25px;
+  width: 75%;
+}
+
+#form button{
+  height: 60px;
+  width: 25%;
+  background-color: #00C80D;
+  border-width: 0;
+}
+
+#homepage-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#homepage-container p{
+  text-align: center;
+}
