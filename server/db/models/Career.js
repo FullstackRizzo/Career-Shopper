@@ -2,7 +2,7 @@ const { INTEGER } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Product = db.define('product', {
+const Career = db.define('career', {
     name: {
       type: Sequelize.STRING,
       allowNull: false
@@ -27,5 +27,5 @@ const Product = db.define('product', {
     }
   });
   
-  module.exports = Product;
+  module.exports = Career;
   
