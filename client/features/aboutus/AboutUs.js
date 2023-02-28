@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import firstImage from "../../../Images/bioPictures/fourthImage.png";
+
+// const firstImage = require("firstImage.jpg");
 
 const AboutUs = () => {
   return (
@@ -18,10 +21,7 @@ const AboutUs = () => {
       <h1>Leadership</h1>
       <div id="teamContainer">
         <div id="CEO">
-          <img
-            id="wilsonYuImage"
-            src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          />
+          <img id="wilsonYuImage" src={firstImage} />
           <h2>Wilson Yu</h2>
           <h3>Chief Executive Officer</h3>
           <p>
@@ -29,8 +29,8 @@ const AboutUs = () => {
             just sit right there; I'll tell you how I became the prince of a town called Bel-Air
           </p>
         </div>
-        <div id="CFO">
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
+        {/* <div id="CFO">
+          <img src={"/firstImage.jpg"} />
           <h2>Stephen Supe</h2>
           <h3>Chief Financial Officer</h3>
           <p>
@@ -41,7 +41,7 @@ const AboutUs = () => {
           </p>
         </div>
         <div id="CTO">
-          <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" />
+          <img src={"/firstImage.jpg"} />
           <h2>Bryan Pokriki</h2>
           <h3>Chief Technology Officer</h3>
           <p>
@@ -50,14 +50,14 @@ const AboutUs = () => {
           </p>
         </div>
         <div id="COO">
-          <img src="https://images.unsplash.com/photo-1633187841127-8b3e776b6a41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" />
+          <img src={"/firstImage.jpg"} />
           <h2>James Thayer</h2>
           <h3>Chief Operations Officer</h3>
           <p>
             I pulled up to the house about seven or eight And I yelled to the cabbie, "Yo holmes, smell ya later" I
             looked at my kingdom I was finally there To sit on my throne as the prince of Bel-Air
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
