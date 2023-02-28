@@ -11,7 +11,7 @@ const AllCareers = () => {
 
   useEffect(() => {
     const fetchCareers = async () => {
-      const response = await axios.get('/api/careers');
+      const response = await axios.get("/api/careers");
       setCareers(response.data);
       setFilteredCareers(response.data);
     };
@@ -44,7 +44,8 @@ const AllCareers = () => {
   };
 
   return (
-    <div className="all-careers-container">
+
+    <div className="homepage-container">
       <h1>All Careers</h1>
       <div className="search-sort-container">
         <div className="search-container">
@@ -63,7 +64,7 @@ const AllCareers = () => {
       </div>
       <div className="career-list">
         {filteredCareers.map((career) => (
-          <div key={career.id} className="career-item">
+          <div key={career.id} className="careerBox">
             <h1><Link to={`/careers/${career.id}`}>{career.name}</Link></h1>
             <h2>
             <img src={career.imageUrl} alt={career.name} className="career-image" />
@@ -76,4 +77,6 @@ const AllCareers = () => {
   );
 };
 
+
 export default AllCareers;
+
