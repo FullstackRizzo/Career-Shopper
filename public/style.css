@@ -1,4 +1,26 @@
+.cormorantPageTitle {
+  font-family: 'Cormorant Garamond', serif;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.pageHeading {
+  font-size: 35px;
+  text-align: center;
+}
+
+/* End of Generic Classes */
+
+
+
 body {
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
 }
 
@@ -13,22 +35,13 @@ label {
 
 nav a {
   display: inline-block;
-  /* margin: 1em; */
+  padding: 1em;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
 }
-
-
-/* Non-template CSS, names here will likely need to change */
-
-/*Start working space*/
-
-/* * {
-  transition: opacity 0.4s;
-} */
 
 .navbar-menu {
   display: flex;
@@ -40,7 +53,6 @@ form div {
 
 #hamburgerLinks {
   display: none;
-  /* opacity: 0; */
   position: absolute;
   flex-direction: column;
   justify-content: space-between;
@@ -69,71 +81,35 @@ form div {
   color: white;
 }
 
-.navbar-menu a {
-  padding: 1em;
-  text-decoration: none;
-}
-
 .navbar-menu a.icon {
   display: block;
 }
 
 .navbar-menu a:hover, #hamburgerLinks a:hover {
-  /*Change these hover colors*/
   background-color: #ddd;
   color: black;
 }
 
-.active {
-  /*This may be unneeded*/
-  background-color: #04AA6D;
+#homepageBodyLinkSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+#homepageBodyLinkSection a {
+  padding: 30px;
   color: white;
+  background-color: rgb(95, 95, 95);
+  border-radius: 20px;
 }
 
-/*End working space*/
-
-
-
-.navbar-link {
-  color: ;
-}
-
-.dropdown-menu {
-  color: ;
-  background-color: ;
-}
-
-.dropdown-link {
-  color: ;
-}
-
-
-.header-text {
-  color: ;
-}
-
-.common-text {
-  color: ;
-}
-
-.link-text {
-  color: ;
-  background-color: ;
-}
-
-.link-text:hover {
-  color: ;
-  background-color: ;
-}
-
-.button {
-  color: ;
-  background-color: ;
-}
-
-.button:hover {
-  color: ;
-  background-color: ;
+#homepageBodyLinkSection a:hover {
+  color: black;
+  background-color: rgb(187, 187, 187);
 }
 
 .form-nav-container {
@@ -179,6 +155,7 @@ form div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px 100px;
 }
 
 #homepage-container p{
