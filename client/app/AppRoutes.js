@@ -6,6 +6,7 @@ import Account from '../features/account/Account';
 import Homepage from '../features/homepage/Homepage';
 import { me } from './store';
 import Careers from '../features/allcareers/AllCareers';
+import SingleCareer from '../features/singlecareer/SingleCareer';
 
 /**
  * COMPONENT
@@ -23,11 +24,9 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn ? (
         <Routes>
-
           <Route path="/" element={<Homepage />} />
           <Route path="/*" element={<Account />} />
           <Route to="/account" element={<Account />} />
-
         </Routes>
       ) : (
         <Routes>
@@ -44,8 +43,8 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/" element={<Homepage />} />
-
           <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:id" element={<SingleCareer />} />
 
         </Routes>
       )}

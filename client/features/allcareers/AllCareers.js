@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Careers = () => {
   const [careers, setCareers] = useState([]);
@@ -17,12 +18,11 @@ const Careers = () => {
       <h1>Careers</h1>
       {careers.map((career) => (
         <div key={career.id}>
-          <h2>{career.name}</h2>
-          <p>{career.description}</p>
-          <p>Salary: ${career.salary}</p>
-          <p>Time of Completion: {career.timeOfCompletion} years</p>
-          <p>Cost: ${career.cost}</p>
+          <h2>
+            <Link to={`/careers/${career.id}`}>{career.name}</Link>
+          </h2>
           <img src={career.imageUrl} alt={career.name} />
+          <p>Cost: ${career.cost}</p>
         </div>
       ))}
     </div>
@@ -30,3 +30,4 @@ const Careers = () => {
 };
 
 export default Careers;
+
