@@ -7,7 +7,8 @@ async function seed() {
   // Seed users
   const users = await Promise.all([
     User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' })
+    User.create({ username: 'murphy', password: '123' }),
+    User.create({username: 'admin', password: 'admin', admin: true})
   ]);
   console.log(`seeded ${users.length} users`);
 

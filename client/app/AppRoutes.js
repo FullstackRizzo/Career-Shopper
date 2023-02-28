@@ -6,7 +6,10 @@ import Account from '../features/account/Account';
 import Homepage from '../features/homepage/Homepage';
 import { me } from './store';
 import Careers from '../features/allcareers/AllCareers';
+
 import SingleCareer from '../features/singlecareer/SingleCareer';
+
+import ViewCareers from '../features/adminActions/ViewCareers';
 
 /**
  * COMPONENT
@@ -24,9 +27,16 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn ? (
         <Routes>
+
           <Route path="/" element={<Homepage />} />
           <Route path="/*" element={<Account />} />
           <Route to="/account" element={<Account />} />
+
+          <Route path = '/viewcareers' element ={<ViewCareers/>}/>
+          <Route path="/" element={<Homepage />}/>
+          <Route path="/*" element={<Account />}/>
+          <Route to="/account" element={<Account />}/>
+
         </Routes>
       ) : (
         <Routes>
