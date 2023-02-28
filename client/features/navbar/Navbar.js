@@ -5,10 +5,13 @@ import { logout } from "../../app/store";
 
 function expandHamburger() {
   let e = document.querySelector("#hamburgerLinks");
+  let burger = document.querySelector("#burger");
   if (e.style.display === "flex") {
     e.style.display = "none";
+    burger.style.backgroundColor = "inherit";
   } else {
     e.style.display = "flex";
+    burger.style.backgroundColor = "#ddd";
   }
   // if (e.style.opacity === "1") {
   //   e.style.display = "none";
@@ -29,11 +32,11 @@ const Navbar = () => {
   };
 
   return (
-    <div>
-      <h1>Career Shopper</h1>
+    <div className="headerSection">
+      <h1 className="cormorantPageTitle">Career Shopper</h1>
       <nav className="navbar-menu">
-        <a href="javascript:void(0);" class="icon" onClick={expandHamburger}>
-          <i class="fa fa-bars"></i>
+        <a href="javascript:void(0);" class="icon" id="burger" onClick={expandHamburger}>
+          <i className="fa fa-bars"></i>
         </a>
         {isLoggedIn ? (
           <div>
@@ -62,7 +65,6 @@ const Navbar = () => {
           <Link to="/contact">Contact Us</Link>
         </div>
       </div>
-      <hr />
     </div>
   );
 };
