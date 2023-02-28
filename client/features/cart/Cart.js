@@ -9,8 +9,7 @@ const Cart = () =>{
     const navigate = useNavigate();
     const cart = useSelector(selectGetCart);
     const userId = useSelector(state => state.auth.me.id);
-
-
+ 
     const cartTotal = cart.reduce((acc, career) => {
         acc += career.price * career.quantity;
         return acc;
@@ -31,17 +30,17 @@ const Cart = () =>{
 
     return ( 
         <div id = 'cart-container' >
-            <h1>Your Cart</h1>
+            <h1>Your Cart:</h1>
             <h2>Subtotal: ${cartTotal}</h2>
             <div id = 'cart-items' >
-                {cart.map((career) => {
+                {cart.map((careers) => {
                     return (
-                        <div key = {career.id} >
-                            <img src = {career.image} />
-                            <h3 > {career.title} </h3>
-                            <h4 > ${career.price} </h4>
-                            <h4 > Quantity: {career.quantity} </h4>
-                            <button onClick = {() => handleDelete(career.id)} > Delete </button>
+                        <div key = {careers.id} >
+                            <img src = {careers.imageUrl} />
+                            <h3 > {careers.name} </h3>
+                            <h4 > ${careers.cost} </h4>
+                            <h4 > Quantity: {careers.length} </h4>
+                            <button onClick = {() => handleDelete(careers.id)} > Delete </button>
                         </div>
                     );
                 })}
