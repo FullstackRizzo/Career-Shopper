@@ -7,7 +7,7 @@ import Homepage from '../features/homepage/Homepage';
 import { me } from './store';
 import Careers from '../features/allcareers/AllCareers';
 
-import SingleCareer from '../features/singlecareer/SingleCareer';
+import SingleCareer from '../features/singlecareer/singleCareer';
 
 import ViewCareers from '../features/adminActions/ViewCareers';
 

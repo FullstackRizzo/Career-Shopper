@@ -13,3 +13,14 @@ router.get('/:id', async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete('/:id', async (req,res,next)=>{
+  try{
+    const career = await Career.findByPk(req.params.id);
+    await career.destroy();
+    res.send(career);
+  }
+  catch(err){
+    next(err);
+  }
+});
