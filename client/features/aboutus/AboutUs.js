@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import firstImage from "../../../Images/bioPictures/fourthImage.png";
+import firstImage from "../../../Images/bioPictures/firstImage.png";
+import secondImage from "../../../Images/bioPictures/secondImage.png";
+import thirdImage from "../../../Images/bioPictures/thirdImage.png";
+import fourthImage from "../../../Images/bioPictures/fourthImage.png";
 
 // const firstImage = require("firstImage.jpg");
 
@@ -29,8 +32,8 @@ const AboutUs = () => {
             just sit right there; I'll tell you how I became the prince of a town called Bel-Air
           </p>
         </div>
-        {/* <div id="CFO">
-          <img src={"/firstImage.jpg"} />
+        <div id="CFO">
+          <img src={secondImage} />
           <h2>Stephen Supe</h2>
           <h3>Chief Financial Officer</h3>
           <p>
@@ -41,7 +44,7 @@ const AboutUs = () => {
           </p>
         </div>
         <div id="CTO">
-          <img src={"/firstImage.jpg"} />
+          <img src={thirdImage} />
           <h2>Bryan Pokriki</h2>
           <h3>Chief Technology Officer</h3>
           <p>
@@ -50,14 +53,14 @@ const AboutUs = () => {
           </p>
         </div>
         <div id="COO">
-          <img src={"/firstImage.jpg"} />
+          <img src={fourthImage} />
           <h2>James Thayer</h2>
           <h3>Chief Operations Officer</h3>
           <p>
             I pulled up to the house about seven or eight And I yelled to the cabbie, "Yo holmes, smell ya later" I
             looked at my kingdom I was finally there To sit on my throne as the prince of Bel-Air
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );

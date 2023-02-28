@@ -61,6 +61,24 @@ form div {
 
 /* Start of Navbar */
 
+.rotate{
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.rotate.down{
+  -ms-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#burger {
+  text-decoration: none;
+  background-color: transparent;
+}
+
 .navbar-menu {
   display: flex;
   position: relative;
@@ -103,7 +121,12 @@ form div {
   display: block;
 }
 
-.navbar-menu a:hover, #hamburgerLinks a:hover {
+.navLink:hover, #hamburgerLinks a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#burgerBox:hover {
   background-color: #ddd;
   color: black;
 }
@@ -154,10 +177,6 @@ form div {
   background-size: auto;
 
   overflow: hidden;
-}
-
-#wilsonYuImage {
-  
 }
 
 /* End of About Us */

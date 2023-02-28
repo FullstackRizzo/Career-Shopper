@@ -6,20 +6,12 @@ import { logout } from "../../app/store";
 function expandHamburger() {
   let e = document.querySelector("#hamburgerLinks");
   let burger = document.querySelector("#burger");
+  burger.classList.toggle("down");
   if (e.style.display === "flex") {
     e.style.display = "none";
-    burger.style.backgroundColor = "inherit";
   } else {
     e.style.display = "flex";
-    burger.style.backgroundColor = "#ddd";
   }
-  // if (e.style.opacity === "1") {
-  //   e.style.display = "none";
-  //   e.style.opacity = 0;
-  // } else {
-  //   e.style.display = "block";
-  //   e.style.opacity = 1;
-  // }
 }
 
 const Navbar = () => {
@@ -35,22 +27,28 @@ const Navbar = () => {
     <div className="headerSection">
       <h1 className="cormorantPageTitle">Career Shopper</h1>
       <nav className="navbar-menu">
-        <a href="javascript:void(0);" class="icon" id="burger" onClick={expandHamburger}>
-          <i className="fa fa-bars"></i>
+        <a href="javascript:void(0);" class="icon" id="burgerBox" onClick={expandHamburger}>
+          <i className="fa fa-bars rotate" id="burger"></i>
         </a>
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/">Home</Link>
-            <a href="javascript:void(0);" onClick={logoutAndRedirectHome}>
+            <Link to="/" className="navLink">
+              Home
+            </Link>
+            <a href="javascript:void(0);" className="navLink" onClick={logoutAndRedirectHome}>
               Logout
             </a>
           </div>
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/login" className="navLink">
+              Login
+            </Link>
+            <Link to="/signup" className="navLink">
+              Sign Up
+            </Link>
           </div>
         )}
       </nav>
