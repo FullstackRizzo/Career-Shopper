@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Careers = () => {
   const [careers, setCareers] = useState([]);
 
   useEffect(() => {
     const fetchCareers = async () => {
-      const response = await axios.get('/api/careers');
+      const response = await axios.get("/api/careers");
       setCareers(response.data);
     };
     fetchCareers();
   }, []);
 
   return (
-    <div>
+    <div className="homepage-container">
       <h1>Careers</h1>
       {careers.map((career) => (
-        <div key={career.id}>
+        <div key={career.id} className="careerBox">
           <h2>
             <Link to={`/careers/${career.id}`}>{career.name}</Link>
           </h2>
@@ -30,4 +30,3 @@ const Careers = () => {
 };
 
 export default Careers;
-
