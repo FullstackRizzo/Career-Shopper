@@ -13,10 +13,10 @@ export const fetchCareersAsync = createAsyncThunk('allCareers', async()=>{
     }
 })
 
-export const deleteCareersAsync = createAsyncThunk('deleteCareers', async(id)=>{
+export const deleteCareerAsync = createAsyncThunk('deleteCareer', async (id)=>{
     try{
         const {data} = await axios.delete(`/api/singlecareer/${id}`);
-        return data
+        return data;
     }
     catch(err){
         console.log(err)
@@ -31,9 +31,9 @@ const viewCareersSlice = createSlice({
         builder.addCase(fetchCareersAsync.fulfilled, (state,action)=>{
             return action.payload;
         });
-        builder.addCase(deleteCareersAsync.fulfilled, (state,action)=>{
+        builder.addCase(deleteCareerAsync.fulfilled, (state,action)=>{
             const newState = state.filter((career)=> career.id !== action.payload.id);
-            return newState
+            return newState;
         })
     },
 });

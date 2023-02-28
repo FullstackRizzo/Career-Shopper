@@ -42,9 +42,9 @@ const Navbar = () => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/">Home</Link>
-            <button type="button" onClick={logoutAndRedirectHome}>
+            <a href="javascript:void(0);" onClick={logoutAndRedirectHome}>
               Logout
-            </button>
+            </a>
           </div>
         ) : (
           <div>

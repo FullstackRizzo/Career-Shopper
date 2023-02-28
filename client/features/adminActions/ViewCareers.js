@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCareersAsync, fetchCareersAsync, selectCarrers } from './viewCareersSlice';
+import { deleteCareerAsync, fetchCareersAsync, selectCarrers } from './viewCareersSlice';
 
 const ViewCareers = () => {
   const allCareers = useSelector(selectCarrers);
@@ -9,11 +9,10 @@ const ViewCareers = () => {
   useEffect(()=>{
     dispatch(fetchCareersAsync());
   },[dispatch])
-
-  const handleDelete = async(id) =>{
-    await dispatch(deleteCareersAsync(id));
-  }
   
+  const handleDelete= async(id) =>{
+    await dispatch(deleteCareerAsync(id));
+  }
 
   return (
     <div className='homepage-container'>
@@ -22,7 +21,7 @@ const ViewCareers = () => {
         <div key={career.id}>
           <h2>{career.name}</h2>
           <p>Cost: ${career.cost}</p>
-          <button onClick={e =>{e.preventDefault(); handleDelete(career.id)}}>Delete</button>
+          <button onClick ={e=>{e.preventDefault(); handleDelete(career.id)}}>Delete</button>
         </div>
       ))}
     </div>
