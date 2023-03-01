@@ -56,7 +56,7 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
         });
 
     const cartSlice = createSlice({
-        name: "cart slice",
+        name: "cartSlice",
         initialState,
         reducers: {
             addToCart (state, action) {

@@ -11,42 +11,25 @@ const Cart = () =>{
     const userId = useSelector(state => state.auth.me.id);
 
 
-    const cartTotal = cart.reduce((acc, career) => {
-        acc += career.price * career.quantity;
-        return acc;
-    }, 0);
-
-    useEffect(() => {
-        if (userId) dispatch(getMyCart(userId));
-    }, [dispatch, userId]);
-
-    const handleDelete = (careerId) => {
-        dispatch(deleteCareerFromCart(careerId));
-    };
-
-    const handleCheckout = (cart, userId) => {
-        dispatch(checkoutCart(userId));
-        navigate("/");//maybe navigate to orders page
-    };
-
     return ( 
         <div id = 'cart-container' >
             <h1>Your Cart</h1>
-            <h2>Subtotal: ${cartTotal}</h2>
-            <div id = 'cart-items' >
-                {cart.map((career) => {
+            <h2>Subtotal:</h2>
+            <div id = 'cart-items'>
+                {cart.map((cart) => {
+                    let career = cart.career
                     return (
-                        <div key = {career.id} >
+                        <div key = {career.id}>
                             {/* <img src = {career.image} /> */}
-                            <h3 > {career.name} </h3>
+                            <h3 > {`${career.name}`} </h3>
                             <h4 > ${career.cost} </h4>
-                            <h4 > Quantity: {career.quantity} </h4>
-                            <button onClick = {() => handleDelete()} > Delete </button>
+                            <h4 > Quantity: {cart.quantity} </h4>
+                            <button> Delete </button>
                         </div>
                     );
                 })}
             </div>
-            <button onClick = {() => handleCheckout(cart, userId)} > Checkout </button>
+            <button> Checkout </button>
         </div>
     );
 };
