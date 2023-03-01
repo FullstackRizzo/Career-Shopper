@@ -24,6 +24,10 @@ const Career = db.define('career', {
     imageUrl: {
       type: Sequelize.STRING,
       allowNull: true
+    },
+    category: {
+      type: Sequelize.STRING,
+      allowNull: false,
     }
   });
   
