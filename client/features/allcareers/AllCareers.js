@@ -79,4 +79,3 @@ const AllCareers = () => {
 
 
 export default AllCareers;
-
