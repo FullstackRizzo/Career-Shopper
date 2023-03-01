@@ -23,6 +23,23 @@ export const deleteCareerAsync = createAsyncThunk('deleteCareer', async (id)=>{
     }
 })
 
+export const addCareerAsync = createAsyncThunk('addCareer', async({name, salary, timeOfCompletion, description, cost, imageUrl})=>{
+    try{
+        const {data} = await axios.post(`/api/career`, {
+            name,
+            salary,
+            timeOfCompletion,
+            description,
+            cost,
+            imageUrl,
+        });
+        return data;
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+
 const viewCareersSlice = createSlice({
     name:'viewCareers',
     initialState,
@@ -34,6 +51,9 @@ const viewCareersSlice = createSlice({
         builder.addCase(deleteCareerAsync.fulfilled, (state,action)=>{
             const newState = state.filter((career)=> career.id !== action.payload.id);
             return newState;
+        });
+        builder.addCase(addCareerAsync.fulfilled, (state,action)=>{
+            state.push(action.payload);
         })
     },
 });

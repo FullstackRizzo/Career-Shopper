@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import AddCareer from './AddCareer';
 import { deleteCareerAsync, fetchCareersAsync, selectCarrers } from './viewCareersSlice';
 
 const ViewCareers = () => {
@@ -24,6 +25,7 @@ const ViewCareers = () => {
           <button onClick ={e=>{e.preventDefault(); handleDelete(career.id)}}>Delete</button>
         </div>
       ))}
+      <AddCareer/>
     </div>
   );
 };
