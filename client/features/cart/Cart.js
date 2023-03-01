@@ -26,7 +26,7 @@ const Cart = () =>{
 
     const handleCheckout = (cart, userId) => {
         dispatch(checkoutCart(userId));
-        navigate("/");
+        navigate("/");//maybe navigate to orders page
     };
 
     return ( 
@@ -37,9 +37,9 @@ const Cart = () =>{
                 {cart.map((career) => {
                     return (
                         <div key = {career.id} >
-                            <img src = {career.image} />
-                            <h3 > {career.title} </h3>
-                            <h4 > ${career.price} </h4>
+                            {/* <img src = {career.image} /> */}
+                            <h3 > {career.name} </h3>
+                            <h4 > ${career.cost} </h4>
                             <h4 > Quantity: {career.quantity} </h4>
                             <button onClick = {() => handleDelete()} > Delete </button>
                         </div>
@@ -50,7 +50,5 @@ const Cart = () =>{
         </div>
     );
 };
-
-
 
 export default Cart;
