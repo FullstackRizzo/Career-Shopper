@@ -41,7 +41,7 @@ const Cart = () =>{
                             <h3 > {career.title} </h3>
                             <h4 > ${career.price} </h4>
                             <h4 > Quantity: {career.quantity} </h4>
-                            <button onClick = {() => handleDelete(career.id)} > Delete </button>
+                            <button onClick = {() => handleDelete()} > Delete </button>
                         </div>
                     );
                 })}
