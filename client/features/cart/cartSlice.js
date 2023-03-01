@@ -80,7 +80,7 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
             });
             builder.addCase(deleteCareerFromCart.fulfilled, (state, action) => {
                 return state.filter((career) => {
-                    return career.id !== action.payload.id;
+                    return career.id !== action.payload;
                 });
             });
         }

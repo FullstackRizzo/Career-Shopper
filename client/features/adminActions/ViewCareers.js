@@ -15,7 +15,7 @@ const ViewCareers = () => {
   }
 
   return (
-    <div>
+    <div className='homepage-container'>
       <h1>Careers</h1>
       {allCareers.map((career) => (
         <div key={career.id}>

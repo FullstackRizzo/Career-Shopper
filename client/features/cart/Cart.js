@@ -10,12 +10,11 @@ const Cart = () =>{
     const cart = useSelector(selectGetCart);
     const userId = useSelector(state => state.auth.me.id);
 
-
     const cartTotal = cart.reduce((acc, career) => {
-        acc += career.price * career.quantity;
+        acc += career.cost * career.quantity;
         return acc;
     }, 0);
-
+    console.log("cartTotal", cartTotal)
     useEffect(() => {
         if (userId) dispatch(getMyCart(userId));
     }, [dispatch, userId]);
@@ -41,7 +40,7 @@ const Cart = () =>{
                             <h3 > {career.name} </h3>
                             <h4 > ${career.cost} </h4>
                             <h4 > Quantity: {career.quantity} </h4>
-                            <button onClick = {() => handleDelete()} > Delete </button>
+                            <button onClick = {() => handleDelete(career)} > Delete </button>
                         </div>
                     );
                 })}
