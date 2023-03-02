@@ -25,12 +25,6 @@ const AllCareers = () => {
       setFilteredCareers(response.data);
     };
     fetchCareers();
-  
-    const fetchCategories = async () => {
-      const response = await axios.get("/api/categories");
-      setCategories(response.data);
-    };
-    fetchCategories();
   }, []);
   
 
