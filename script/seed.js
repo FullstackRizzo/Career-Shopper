@@ -1,4 +1,4 @@
-const { db, models: { User, Career } } = require('../server/db');
+const { db, models: { User, Career, Cart } } = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });
@@ -94,7 +94,12 @@ const careers = await Promise.all([
                    category: 'Skilled Trades' }),
 
 ]);
-  
+const cart = await  Promise.all([
+  Cart.create({ 
+  userId: 1, careerId: 1, quantity:1, completed: false})
+])
+console.log(`seeded ${Cart.length} Cart`)
+
   console.log(`seeded ${careers.length} products`);
 
   console.log(`seeded successfully`);
@@ -106,6 +111,9 @@ const careers = await Promise.all([
     careers: {
       career1: careers[0],
       career2: careers[1]
+    },
+    cart: {
+      cart1: cart[1]
     }
     
   };

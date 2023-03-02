@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { addToCart } from '../cart/cartSlice';
+import { useDispatch } from 'react-redux';
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCareer = async () => {
@@ -14,6 +16,12 @@ const SingleCareer = () => {
     fetchCareer();
   }, [id]);
 
+const handleAddToCart = () => {
+    dispatch(addToCart({ 
+       career: career,
+       quantity: 1 }));
+  };
+
   return (
     <div>
       <h1>{career.name}</h1>
@@ -22,7 +30,9 @@ const SingleCareer = () => {
       <p>Salary: ${career.salary}</p>
       <p>Time of Completion: {career.timeOfCompletion} years</p>
       <p>Cost: ${career.cost}</p>
-      <button>Add to Cart</button>
+      <button onClick={(
+        handleAddToCart
+      )}>Add to Cart</button>
     </div>
   );
 };
