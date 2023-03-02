@@ -61,7 +61,12 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
         reducers: {
             addToCart (state, action) {
                 state.push(action.payload);
+            },
+
+            checkoutCartSlice (state, action) {
+                return initialState;
             }
+
         },
         extraReducers: (builder) => {
             builder.addCase(addCareerToCart.fulfilled, (state, action) => {
@@ -86,7 +91,7 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
         }
     });
 
-    export const { addToCart } = cartSlice.actions;
+    export const { addToCart, checkoutCartSlice } = cartSlice.actions;
     export const selectGetCart = (state) => {
         return state.cart;
     };

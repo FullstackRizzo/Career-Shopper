@@ -17,7 +17,9 @@ const SingleCareer = () => {
   }, [id]);
 
 const handleAddToCart = () => {
-    dispatch(addToCart({ careerId: career.id, quantity: 1 }));
+    dispatch(addToCart({ 
+       career: career,
+       quantity: 1 }));
   };
 
   return (
@@ -29,7 +31,7 @@ const handleAddToCart = () => {
       <p>Time of Completion: {career.timeOfCompletion} years</p>
       <p>Cost: ${career.cost}</p>
       <button onClick={(
-        handleAddToCart()
+        handleAddToCart
       )}>Add to Cart</button>
     </div>
   );
