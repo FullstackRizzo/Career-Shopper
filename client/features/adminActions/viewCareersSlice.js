@@ -23,15 +23,16 @@ export const deleteCareerAsync = createAsyncThunk('deleteCareer', async (id)=>{
     }
 })
 
-export const addCareerAsync = createAsyncThunk('addCareer', async({name, salary, timeOfCompletion, description, cost, imageUrl})=>{
+export const addCareerAsync = createAsyncThunk('addCareer', async({name, salary, timeOfCompletion, description, cost, imageUrl, category})=>{
     try{
-        const {data} = await axios.post(`/api/career`, {
+        const {data} = await axios.post(`/api/careers`, {
             name,
             salary,
             timeOfCompletion,
             description,
             cost,
             imageUrl,
+            category,
         });
         return data;
     }

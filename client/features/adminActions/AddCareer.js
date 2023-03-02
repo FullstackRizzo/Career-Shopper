@@ -9,6 +9,7 @@ const AddCareer = () =>{
     const [description, setDescription] = useState('');
     const [cost, setCost] = useState(0);
     const [imageUrl, setImageUrl] = useState('');
+    const [category, setCategory] = useState('');
     const dispatch = useDispatch();
 
     const handleSubmit = (event) =>{
@@ -19,7 +20,8 @@ const AddCareer = () =>{
             timeOfCompletion: timeOfCompletion,
             description: `${description}`,
             cost: cost,
-            imageUrl: `${imageUrl}`
+            imageUrl: `${imageUrl}`,
+            category: `${category}`
         }))
         setName('')
         setSalary(0)
@@ -27,6 +29,7 @@ const AddCareer = () =>{
         setDescription('')
         setCost(0)
         setImageUrl('')
+        setCategory('')
     }
 
 
@@ -43,6 +46,8 @@ const AddCareer = () =>{
         <input type='number' step = 'any' value ={timeOfCompletion} onChange={ev => setTimeOfCompletion(ev.target.value)}/>
         <label>Cost</label>
         <input type= 'number' step = 'any' value= {cost} onChange={ev => setCost(ev.target.value)}/>
+        <label>Category</label>
+        <input placeholder = {'category...'} type= 'text' value = {category} onChange={ev => setCategory(ev.target.value)}/>
         <label>Image Url</label>
         <input placeholder = {'paste link to picture...'} type = 'text' value= {imageUrl} onChange={ev => setImageUrl(ev.target.value)}/>
         <label>Description</label>
