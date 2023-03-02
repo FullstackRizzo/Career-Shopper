@@ -28,8 +28,11 @@ const Career = db.define('career', {
     category: {
       type: Sequelize.STRING,
       allowNull: false,
+    },
+    quantity: {
+      type: Sequelize.INTEGER,
+      defaultValue: 25
     }
-  });
-  
-  module.exports = Career;
-  
+});
+
+module.exports = Career;

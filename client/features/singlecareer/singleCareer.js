@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { addToCart } from '../cart/cartSlice';
+import { useDispatch } from 'react-redux';
 
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCareer = async () => {
@@ -14,16 +17,30 @@ const SingleCareer = () => {
     fetchCareer();
   }, [id]);
 
+  const handleAddToCart = () => {
+    dispatch(addToCart({ 
+       career: career,
+       quantity: 1 
+    }));
+  };
+
+
+  const buttonContent = career.quantity > 0 ? "Add to Cart" : "SOLD OUT";
+
   return (
-    <div>
-      <h1>{career.name}</h1>
-      <img src={career.imageUrl} alt={career.name} />
-      <p>{career.description}</p>
-      <p>Salary: ${career.salary}</p>
-      <p>Time of Completion: {career.timeOfCompletion} years</p>
-      <p>Cost: ${career.cost}</p>
-      <button>Add to Cart</button>
-    </div>
+    <div className="single-career-container">
+  <h1 className="single-career-title">{career.name}</h1>
+  <img src={career.imageUrl} alt={career.name} className="single-career-image" />
+  <p className="single-career-description">{career.description}</p>
+  <p className="single-career-salary">Salary: ${career.salary}</p>
+  <p className="single-career-time">Time of Completion: {career.timeOfCompletion} years</p>
+  <p className="single-career-cost">Cost: ${career.cost}</p>
+  <p className="single-career-quantity">Quantity: {career.quantity}</p>
+  <button onClick={handleAddToCart} disabled={career.quantity === 0} className="single-career-button">
+    {buttonContent}
+  </button>
+</div>
+
   );
 };
 

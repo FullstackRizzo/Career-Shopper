@@ -58,6 +58,7 @@ const Navbar = () => {
           <Link to="/careers">Careers</Link>
           <Link to="/about">About Us</Link>
           <Link to="/account">Account</Link>
+          <Link to="/cart">Cart</Link>
         </div>
         <div id="hamburgerLinksBottomSection">
           <Link to="/contact">Contact Us</Link>
