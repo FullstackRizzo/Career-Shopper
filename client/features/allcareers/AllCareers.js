@@ -26,15 +26,9 @@ const AllCareers = () => {
     };
     fetchCareers();
   
-    const fetchCategories = async () => {
-      const response = await axios.get("/api/categories");
-      setCategories(response.data);
-    };
-    fetchCategories();
-  }, []);
+  });
   
-
-  const handleSearch = (e) => {
+const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
     setSearchTerm(searchTerm);
     const filtered = careers.filter((career) => {
@@ -76,8 +70,8 @@ const AllCareers = () => {
   ))}
 </select>
 
-        </div>
-      </div>
+  </div>
+    </div>
       <div className="career-list">
         {filteredCareers.map((career) => (
           <div key={career.id} className="careerBox">
@@ -87,7 +81,7 @@ const AllCareers = () => {
             </h2>
             <p>Cost: ${career.cost}</p>
           </div>
-        ))}
+         ))}
       </div>
     </div>
   );
