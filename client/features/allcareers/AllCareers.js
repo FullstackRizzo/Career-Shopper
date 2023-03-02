@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import "./AllCareers"
+
+const categories = [
+  "Medical",
+  "Construction",
+  "Engineering",
+  "Legal",
+  "Education",
+  "Hospitality",
+  "Skilled Trades"
+];
 
 const AllCareers = () => {
   const [careers, setCareers] = useState([]);
   const [filteredCareers, setFilteredCareers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   useEffect(() => {
     const fetchCareers = async () => {
@@ -16,35 +25,39 @@ const AllCareers = () => {
       setFilteredCareers(response.data);
     };
     fetchCareers();
-  }, []);
-
-  useEffect(() => {
-    const sortCareers = () => {
-      if (sortType === 'salary') {
-        const sortedCareers = [...filteredCareers].sort((a, b) => b.salary - a.salary);
-        setFilteredCareers(sortedCareers);
-      } else if (sortType === 'time') {
-        const sortedCareers = [...filteredCareers].sort((a, b) => a.timeOfCompletion - b.timeOfCompletion);
-        setFilteredCareers(sortedCareers);
-      } else if (sortType === 'cost') {
-        const sortedCareers = [...filteredCareers].sort((a, b) => a.cost - b.cost);
-        setFilteredCareers(sortedCareers);
-      }
+  
+    const fetchCategories = async () => {
+      const response = await axios.get("/api/categories");
+      setCategories(response.data);
     };
-    sortCareers();
-  }, [sortType, filteredCareers]);
+    fetchCategories();
+  }, []);
+  
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
     setSearchTerm(searchTerm);
     const filtered = careers.filter((career) => {
-      return career.name.toLowerCase().includes(searchTerm);
+      const includesSearchTerm = career.name.toLowerCase().includes(searchTerm);
+      const includesCategory = categoryFilter === '' || career.category === categoryFilter;
+      return includesSearchTerm && includesCategory;
     });
     setFilteredCareers(filtered);
   };
 
-  return (
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setCategoryFilter(category);
+    const filtered = careers.filter((career) => {
+      const includesSearchTerm = career.name.toLowerCase().includes(searchTerm);
+      const includesCategory = category === '' || career.category === category;
+      return includesSearchTerm && includesCategory;
+    });
+    setFilteredCareers(filtered);
+  };
+  
 
+  return (
     <div className="homepage-container">
       <h1>All Careers</h1>
       <div className="search-sort-container">
@@ -53,13 +66,16 @@ const AllCareers = () => {
           <input type="text" id="search" value={searchTerm} onChange={handleSearch} />
         </div>
         <div className="sort-container">
-          <label htmlFor="sort">Sort by:</label>
-          <select id="sort" value={sortType} onChange={(e) => setSortType(e.target.value)}>
-            <option value="">--Select--</option>
-            <option value="salary">Salary</option>
-            <option value="time">Time of Completion</option>
-            <option value="cost">Cost</option>
-          </select>
+          <label htmlFor="category">Filter by category:</label>
+          <select id="category" value={categoryFilter} onChange={handleCategoryChange}>
+  <option value="">All categories</option>
+  {categories.map((category) => (
+    <option key={category} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
+
         </div>
       </div>
       <div className="career-list">
@@ -76,6 +92,5 @@ const AllCareers = () => {
     </div>
   );
 };
-
 
 export default AllCareers;
