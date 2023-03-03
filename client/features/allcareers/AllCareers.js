@@ -25,8 +25,7 @@ const AllCareers = () => {
       setFilteredCareers(response.data);
     };
     fetchCareers();
-  
-  });
+  }, []);
   
 const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();

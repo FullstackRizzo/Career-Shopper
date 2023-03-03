@@ -22,7 +22,7 @@ const Career = db.define('career', {
       type: INTEGER
     },
     imageUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING, 
       allowNull: true
     },
     category: {
