@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import singleCareerDetailsSlice from '../features/adminActions/singleCareerDetailsSlice';
+import viewAllUsersSlice from '../features/adminActions/viewAllUsersSlice';
 import viewCareersSlice from '../features/adminActions/viewCareersSlice';
 import authReducer from '../features/auth/authSlice';
 import cartSlice from '../features/cart/cartSlice';
@@ -12,6 +14,8 @@ const store = configureStore({
     cart: cartSlice,
     singleUser: singleUserSlice,
     allUsers: allUsersSlice,
+    singleCareerDetails: singleCareerDetailsSlice,
+    viewAllUsers: viewAllUsersSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

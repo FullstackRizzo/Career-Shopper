@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
+import { selectGetCart } from "../cart/cartSlice";
 
 function expandHamburger() {
   let e = document.querySelector("#hamburgerLinks");
@@ -21,18 +22,26 @@ const Navbar = () => {
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate("/login");
-  };
+};
+
+  const cart = useSelector(selectGetCart);
 
   return (
     <div className="headerSection">
       <h1 className="cormorantPageTitle">Career Shopper</h1>
       <nav className="navbar-menu">
-        <a href="javascript:void(0);" class="icon" id="burgerBox" onClick={expandHamburger}>
+        <a href="javascript:void(0);" className="icon" id="burgerBox" onClick={expandHamburger}>
           <i className="fa fa-bars rotate" id="burger"></i>
         </a>
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
+            <Link to="/cart" className="navLink">
+              <span role="img" aria-label="cart">
+                🛒
+              </span>
+              {cart.length > 0 && <span className="cartCount">{cart.length}</span>}
+            </Link>
             <Link to="/" className="navLink">
               Home
             </Link>

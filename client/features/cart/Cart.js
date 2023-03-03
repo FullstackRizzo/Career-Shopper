@@ -45,12 +45,12 @@ const [localCart, setItem] = useState([]);
 localCart.push([cart]);
 useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(localCart));
-}, [localCart]);//add objects to local storage
+  }, [localCart]); //add objects to local storage
 
-useEffect(() => {
-    const localCart = JSON.parse(localStorage.getItem("cart"));;
+  useEffect(() => {
+    const localCart = JSON.parse(localStorage.getItem("cart"));
     if (cart) {
-        setItem(localCart);
+      setItem(localCart);
     }
 }, [cart]);
 console.log(localCart);
@@ -157,75 +157,68 @@ const cartTotal = cart.reduce((acc, {career, quantity}) => {
     };
     console.log("cart", cart);
     console.log("localCart", localCart);
-    return ( 
-        <div>
-        <div id = 'cart-container' >
-            <h1>Your Cart</h1>
-            <h2>Subtotal: ${cartTotal}</h2>
-            <div id = 'cart-items' >
-                {localCart.map((career) => {
-                    // let career = cart.career;
-                    return (
-                        <div key = {career.id} >
-                            {/* <img src = {career.imageURL} /> */}
-                            <h3 > {localCart.name} </h3>
-                            <h4 > ${localCart.cost} </h4>
-                            <h4 > Quantity: {localCart.quantity} </h4>
-                            <button onClick = {() =>
-                                 handleIncreaseQuantity(localCart, career)} > + </button>
-                            <button onClick = {() => 
-                                handleDecreaseQuantity(localCart, career)} > - </button>
-                            <button onClick = {() => handleDelete(localCart, career)} > Delete </button>
-                        </div>
-                    );
-                })}
-            </div>
-            
-            <form onSubmit = {handleSubmit} >
-                <h4>Shipping:</h4>
-                <label htmlFor = "username" > Username: </label>
-                <input
-                    name = "username"
-                    value = {username}
-                    onChange = {(evt) => setUserName(evt.target.value)}
-                />
-                <label htmlFor = "firstName" > First Name: </label>
-                <input
-                    firstName = "firstName"
-                    value = {firstName}
-                    onChange = {(evt) => setFirstName(evt.target.value)}
-                />
-                <label htmlFor = "lastName" > Last Name: </label>
-                <input
-                    lastName = "lastName"
-                    value = {lastName}
-                    onChange = {(evt) => setLastName(evt.target.value)}
-                />
-                <label htmlFor = "address" > Address: </label>
-                <input
-                    address = "address"
-                    value = {address}
-                    onChange = {(evt) => setAddress(evt.target.value)}
-                />
-                <label htmlFor ="email" > Email: </label>
-                <input
-                    email = "email"
-                    value = {email}
-                    onChange = {(evt) => setEmail(evt.target.value)}
-                />
-                <label htmlFor = "phone" > Phone: </label>
-                <input
-                    phone = "phone"
-                    value = {phone}
-                    onChange = {(evt) => setPhone(evt.target.value)}
-                />
-                <button type = "submit" > Update info </button>
-            </form>
 
-            <button onClick = {() => handleCheckout(localCart, userId)} > Checkout </button>
+    return ( 
+    <div>
+            <div id='cart-container'>
+                <h1>Your Cart</h1>
+                <h2>Subtotal: ${cartTotal}</h2>
+                <div id='cart-items'>
+                    {localCart.map((career) => {
+                        // let career = cart.career;
+                        return (
+                            <div key={career.id}>
+                                {/* <img src = {career.imageURL} /> */}
+                                <h3> {localCart.name} </h3>
+                                <h4> ${localCart.cost} </h4>
+                                <h4> Quantity: {localCart.quantity} </h4>
+                                <button onClick={() => handleIncreaseQuantity(localCart, career)}> + </button>
+                                <button onClick={() => handleDecreaseQuantity(localCart, career)}> - </button>
+                                <button onClick={() => handleDelete(localCart, career)}> Delete </button>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <form onSubmit={handleSubmit}>
+                    <h4>Shipping:</h4>
+                    <label htmlFor="username"> Username: </label>
+                    <input
+                        name="username"
+                        value={username}
+                        onChange={(evt) => setUserName(evt.target.value)} />
+                    <label htmlFor="firstName"> First Name: </label>
+                    <input
+                        firstName="firstName"
+                        value={firstName}
+                        onChange={(evt) => setFirstName(evt.target.value)} />
+                    <label htmlFor="lastName"> Last Name: </label>
+                    <input
+                        lastName="lastName"
+                        value={lastName}
+                        onChange={(evt) => setLastName(evt.target.value)} />
+                    <label htmlFor="address"> Address: </label>
+                    <input
+                        address="address"
+                        value={address}
+                        onChange={(evt) => setAddress(evt.target.value)} />
+                    <label htmlFor="email"> Email: </label>
+                    <input
+                        email="email"
+                        value={email}
+                        onChange={(evt) => setEmail(evt.target.value)} />
+                    <label htmlFor="phone"> Phone: </label>
+                    <input
+                        phone="phone"
+                        value={phone}
+                        onChange={(evt) => setPhone(evt.target.value)} />
+                    <button type="submit"> Update info </button>
+                </form>
+
+                <button onClick={() => handleCheckout(localCart, userId)}> Checkout </button>
+            </div>
         </div>
-        </div>
-    );
+  );
 };
 
 export default Cart;
