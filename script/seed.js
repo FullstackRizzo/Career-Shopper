@@ -83,12 +83,31 @@ const careers = await Promise.all([
                    imageUrl: 'https://lirp.cdn-website.com/4785875f/dms3rep/multi/opt/PIC1-500x334-640w.jpg'}),
 
 ]);
-const cart = await  Promise.all([
-  Cart.create({ 
-  userId: 1, careerId: 1, quantity:1, completed: false})
-])
-console.log(`seeded ${Cart.length} Cart`)
+// const cart = await  Promise.all([
+//   Cart.create({ 
+//   userId: 1, quantity:1, completed: false}),
+//   Cart.create({
+//   userId: 2, quantity:1, completed: false}),
+// ])
+ const cart = await Promise.all ([  
+ Cart.create ({
+  userId: 1, quantity:1, completed: false
+  }),
+  Cart.create ({
+  userId: 2, quantity:1, completed: false
+  }),
+  Cart.create ({
+  userId: 3, quantity:1, completed: false
+  }),
+  ])
 
+  const cody = await User.findByPk(1);
+  const cart1 = await Cart.findByPk(1);
+  await cart1.set(cody);
+
+  console.log(`seeded ${cart.length} carts`)
+  console.log(cart)
+  // console.log(users)
   console.log(`seeded ${careers.length} products`);
 
   console.log(`seeded successfully`);
@@ -102,11 +121,18 @@ console.log(`seeded ${Cart.length} Cart`)
       career2: careers[1]
     },
     cart: {
-      cart1: cart[1]
-    }
+      cart1: cart[0],
+      cart2: cart[1]
+    },
     
+   
+
+    
+  
   };
 }
+
+
 
 async function runSeed() {
   console.log('seeding...');

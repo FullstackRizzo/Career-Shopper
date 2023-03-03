@@ -15,12 +15,29 @@ router.get('/', async (req, res, next) => {
 
 router.get("/myCart", async (req, res, next) => {
     try {
+        console.log(req.headers)
         const cart = await Cart.findAll({
             where: {
-                userId: req.user.id,
+                userId:req.headers.authid.id || null,
                 completed: false,
             },
             include: Career,
+        });
+        res.json(cart);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.get("/myHomeCart", async (req, res, next) => {
+    try {
+        console.log(req.headers)
+        const cart = await Cart.findAll({
+            where:{
+                userId:req.headers.authid || null, 
+                completed: false
+            },
+            include: Career
         });
         res.json(cart);
     } catch (err) {
@@ -35,7 +52,7 @@ router.get("/myOrders", async (req, res, next) => {
                 userId: req.user.id,
                 completed: true,
             },
-            include: Career,
+            include: Career
         });
         res.json(cart);
     } catch (err) {
@@ -73,6 +90,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     try {
+        console.log(req.params.id)
         const cart = await Cart.findByPk(req.params.id)
         cart.destroy()
         res.send(cart)

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const initialState = {};
 
-export const getSingleUSer = createAsyncThunk("singleUser", async (id) => {
+export const getSingleUser = createAsyncThunk("singleUser", async (id) => {
     try { 
         const token = window.localStorage.getItem("token");
         const {data} = await axios.get(`/api/users/${id}`, {
@@ -15,12 +15,35 @@ export const getSingleUSer = createAsyncThunk("singleUser", async (id) => {
     }
 });
 
+export const editSingleUser = createAsyncThunk(
+    "singleUser/edit",
+    async ({
+        id,
+        username,
+        password,
+     
+    }) => {
+        try {
+            const { data } = await axios.put(`/api/users/${id}`, {
+                username,
+                password,
+            });
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+);
+
 const singleUserSlice = createSlice({
     name: "singleUser",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getSingleUSer.fulfilled, (state, action) => {
+        builder.addCase(getSingleUser.fulfilled, (state, action) => {
+            return action.payload;
+        });
+        builder.addCase(editSingleUser.fulfilled, (state, action) => {
             return action.payload;
         });
     }

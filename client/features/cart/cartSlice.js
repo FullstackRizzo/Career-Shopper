@@ -20,9 +20,33 @@ export const addCareerToCart = createAsyncThunk(
 
 export const getMyCart = createAsyncThunk("myCart", async (userId) => {
     try {
-        let { data } = await axios.get(`http://localhost:8080/api/cart/myCart`, {
-            userId,
-        });
+        let { data } = await axios.get(`http://localhost:8080/api/cart/myCart`, 
+            { headers: { authid: userId }
+         });
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+export const getMyHomeCart = createAsyncThunk("myHomeCart", async (userId) => {
+    try {
+        let { data } = await axios.get(
+            `http://localhost:8080/api/cart/myHomeCart`,
+            { headers: { authid: userId } }
+        );
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+export const getMyOrders = createAsyncThunk("myOrders", async (userId) => {
+    try {
+        let { data } = await axios.get(
+            `http://localhost:8080/api/cart/myOrders`,
+            { headers: { authid: userId } }
+        );
         return data;
     } catch (error) {
         console.log(error);
@@ -55,12 +79,43 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
             }
         });
 
+        export const editCareerInDBCart = createAsyncThunk(
+            "editCart", async ({id, careerId, quantity, completed}) => {
+                try {
+                    const { data } = await axios.put(`/api/cart/${id}`, {
+                        careerId,
+                        quantity,
+                        completed,
+                    });
+                    return data;
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+
+   
     const cartSlice = createSlice({
         name: "cart slice",
         initialState,
         reducers: {
+            addToQuantity(state, action) {
+                state.map((career) => {
+                    if (action.payload.id == career.id) career.quantity++;
+                });
+            },
+            removeToQuantity(state, action) {
+                state.map((career) => {
+                    if (action.payload.id == career.id && career.quantity > 0) career.quantity--;
+                });
+            },
             addToCart (state, action) {
                 state.push(action.payload);
+            },
+
+            removeFromCart (state, action) {
+                return state.filter((career) => {
+                    return career.id !== action.payload;
+                });
             },
 
             checkoutCartSlice (state, action) {
@@ -72,7 +127,9 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
             builder.addCase(addCareerToCart.fulfilled, (state, action) => {
                 return [...state, action.payload];
             });
+
             builder.addCase(getMyCart.fulfilled, (state, action) => {
+                // console.log(action, '------------action')
                 return action.payload.map((cart) => {
                     cart.career["quantity"] = cart.quantity;
                     cart.career["cartId"] = cart.id;
@@ -88,10 +145,20 @@ export const getMyCart = createAsyncThunk("myCart", async (userId) => {
                     return career.id !== action.payload;
                 });
             });
-        }
+            builder.addCase(editCareerInDBCart.fulfilled, (state, action) => {
+                return state.map((cart) => {
+                    if (cart.id == action.payload.id) cart = action.payload;
+                    return cart;
+                });
+            });
+       
+            builder.addCase(getMyHomeCart.fulfilled, (state, action) => {
+                return action.payload 
+            });
+        },
     });
 
-    export const { addToCart, checkoutCartSlice } = cartSlice.actions;
+    export const { addToCart, checkoutCartSlice, removeFromCart, addToQuantity, removeToQuantity } = cartSlice.actions;
     export const selectGetCart = (state) => {
         return state.cart;
     };
