@@ -28,9 +28,9 @@ router.post("/", async (req, res, next) => {
     }
 });
 
-router.put("/:Id", async (req, res, next) => {
-    try {
-        const career = await Career.findByPk(req.params.Id);
+// router.put("/:Id", async (req, res, next) => {
+//     try {
+//         const career = await Career.findByPk(req.params.Id);
 
 
 
