@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-import { selectGetCart } from "../cart/cartSlice";
+
 
 function expandHamburger() {
   let e = document.querySelector("#hamburgerLinks");
@@ -24,8 +24,7 @@ const Navbar = () => {
     navigate("/login");
 };
 
-  const cart = useSelector(selectGetCart);
-
+ 
   return (
     <div className="headerSection">
       <h1 className="cormorantPageTitle">Career Shopper</h1>
@@ -36,12 +35,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/cart" className="navLink">
-              <span role="img" aria-label="cart">
-                🛒
-              </span>
-              {cart.length > 0 && <span className="cartCount">{cart.length}</span>}
-            </Link>
+            
             <Link to="/" className="navLink">
               Home
             </Link>
@@ -67,7 +61,7 @@ const Navbar = () => {
           <Link to="/careers">Careers</Link>
           <Link to="/about">About Us</Link>
           <Link to="/account">Account</Link>
-          <Link to="/cart">Cart</Link>
+
         </div>
         <div id="hamburgerLinksBottomSection">
           <Link to="/contact">Contact Us</Link>

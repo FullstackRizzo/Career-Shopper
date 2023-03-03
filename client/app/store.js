@@ -4,16 +4,15 @@ import singleCareerDetailsSlice from '../features/adminActions/singleCareerDetai
 import viewAllUsersSlice from '../features/adminActions/viewAllUsersSlice';
 import viewCareersSlice from '../features/adminActions/viewCareersSlice';
 import authReducer from '../features/auth/authSlice';
-import cartSlice from '../features/cart/cartSlice';
+// import orderSlice from '../features/cart/orderSlice';
 import singleUserSlice from '../features/cart/singleUserSlice';
-import allUsersSlice from '../features/cart/allUsersSlice';
+
 const store = configureStore({
   reducer: { 
     auth: authReducer,
     viewCareers: viewCareersSlice,
-    cart: cartSlice,
+    // order: orderSlice,
     singleUser: singleUserSlice,
-    allUsers: allUsersSlice,
     singleCareerDetails: singleCareerDetailsSlice,
     viewAllUsers: viewAllUsersSlice
   },

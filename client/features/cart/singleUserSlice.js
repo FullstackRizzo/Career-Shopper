@@ -35,6 +35,16 @@ export const editSingleUser = createAsyncThunk(
     }
 );
 
+export const addUserAsync = createAsyncThunk("addUser", async (addUser) => {
+    try {
+      const { data } = await axios.post('/api/users', addUser);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  
+
 const singleUserSlice = createSlice({
     name: "singleUser",
     initialState,
@@ -46,6 +56,10 @@ const singleUserSlice = createSlice({
         builder.addCase(editSingleUser.fulfilled, (state, action) => {
             return action.payload;
         });
+
+        builder.addCase(addUserAsync.fulfilled, (state, action) => {
+            return action.payload;
+          });
     }
 });
 

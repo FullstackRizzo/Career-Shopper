@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { addToCart } from '../cart/cartSlice';
+import { addToCart } from '../cart/orderSlice';
 import { useDispatch } from 'react-redux';
+import { saveCartToLocalStorage, getCartFromLocalStorage } from '../../../server/localStorage/localStorage';
 
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
@@ -18,13 +20,21 @@ const SingleCareer = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ 
-       career: career,
-       quantity: 1 
-    }));
-  };
-
-
+    const cartData = getCartFromLocalStorage() || { items: [] };
+    const cartItem = {
+      career: career,
+      quantity: 1,
+    };
+    const existingCartItemIndex = cartData.items.findIndex(item => item.career.id === career.id);
+    if (existingCartItemIndex !== -1) {
+      cartData.items[existingCartItemIndex].quantity++;
+    } else {
+      cartData.items.push(cartItem);
+    }
+    saveCartToLocalStorage(cartData);
+    dispatch(addToCart(cartItem));
+    };
+  
   const buttonContent = career.quantity > 0 ? "Add to Cart" : "SOLD OUT";
 
   return (
