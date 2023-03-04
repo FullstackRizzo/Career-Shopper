@@ -25,6 +25,7 @@ const SingleCareer = () => {
       career: career,
       quantity: 1,
     };
+    console.log(cartData)
     const existingCartItemIndex = cartData.items.findIndex(item => item.career.id === career.id);
     if (existingCartItemIndex !== -1) {
       cartData.items[existingCartItemIndex].quantity++;
@@ -32,24 +33,24 @@ const SingleCareer = () => {
       cartData.items.push(cartItem);
     }
     saveCartToLocalStorage(cartData);
-    dispatch(addToCart(cartItem));
+    // dispatch(addToCart(cartItem));
     };
   
   const buttonContent = career.quantity > 0 ? "Add to Cart" : "SOLD OUT";
 
   return (
-    <div className="single-career-container">
-  <h1 className="single-career-title">{career.name}</h1>
-  <img src={career.imageUrl} alt={career.name} className="single-career-image" />
-  <p className="single-career-description">{career.description}</p>
-  <p className="single-career-salary">Salary: ${career.salary}</p>
-  <p className="single-career-time">Time of Completion: {career.timeOfCompletion} years</p>
-  <p className="single-career-cost">Cost: ${career.cost}</p>
-  <p className="single-career-quantity">Quantity: {career.quantity}</p>
-  <button onClick={handleAddToCart} disabled={career.quantity === 0} className="single-career-button">
-    {buttonContent}
-  </button>
-</div>
+  <div className="single-career-container">
+    <h1 className="single-career-title">{career.name}</h1>
+    <img src={career.imageUrl} alt={career.name} className="single-career-image" />
+    <p className="single-career-description">{career.description}</p>
+    <p className="single-career-salary">Salary: ${career.salary}</p>
+    <p className="single-career-time">Time of Completion: {career.timeOfCompletion} years</p>
+    <p className="single-career-cost">Cost: ${career.cost}</p>
+    <p className="single-career-quantity">Quantity: {career.quantity}</p>
+    <button onClick={handleAddToCart} disabled={career.quantity === 0} className="single-career-button">
+      {buttonContent}
+    </button>
+  </div>
 
   );
 };
