@@ -5,12 +5,13 @@ import viewAllUsersSlice from '../features/adminActions/viewAllUsersSlice';
 import viewCareersSlice from '../features/adminActions/viewCareersSlice';
 import authReducer from '../features/auth/authSlice';
 import cartSlice from '../features/cart/cartSlice';
+
 const store = configureStore({
   reducer: { 
     auth: authReducer,
     viewCareers: viewCareersSlice,
-    cart: cartSlice,
     singleCareerDetails: singleCareerDetailsSlice,
+    cart: cartSlice,
     viewAllUsers: viewAllUsersSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
