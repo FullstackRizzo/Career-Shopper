@@ -1,91 +1,98 @@
-import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-import { getCartFromLocalStorage, saveCartToLocalStorage } from '../../../server/localStorage/localStorage';
-
-export const fetchGuestOrderAsync = createAsyncThunk('guestOrder', async()=>{
-    try{
-        const data = getCartFromLocalStorage()
-        return data;
-    }
-    catch(err){
-        console.log(err);
-    }
-})
-
-export const deleteGuestOrderAsync = createAsyncThunk('deleteGuestOrder', async(id)=>{
-    try{
-        const data  = getCartFromLocalStorage();
-        const itemIndex = data.findIndex(item => item.career.id === id);
-        if (itemIndex !== -1){
-            data.splice(itemIndex, 1);
-        }
-        saveCartToLocalStorage(data);
-        return data;
-    }
-    catch(err){
-        console.log(err)
-    }
-})
-
-export const addToOrderQuantityAsync = createAsyncThunk('addToOrderQuantity', async(id)=>{
-    try{
-        const data = getCartFromLocalStorage();
-        const itemIndex = data.findIndex(item => item.career.id === id);
-        data[itemIndex].quantity++;
-        saveCartToLocalStorage(data);
-        return data;
-    }
-    catch(err){
-        console.log(err)
-    }
-})
-
-export const subtractFromOrderQuantityAsync = createAsyncThunk('subtractfromOrderQuantity', async(id)=>{
-    try{
-        const data = getCartFromLocalStorage();
-        const itemIndex = data.findIndex(item => item.career.id === id);
-        if(itemIndex!== -1){
-            if(data[itemIndex].quantity === 1){
-                data.splice(itemIndex, 1);
-            }
-            else{
-                data[itemIndex].quantity--;
-            }
-        }
-        saveCartToLocalStorage(data);
-        return data;
-    }
-    catch(err){
-        console.log(err)
-    }
-})
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = [];
 
-const cartSlice = createSlice({
-    name:'cart',
-    initialState,
-    reducers:{},
-    extraReducers:(builder)=>{
-        builder.addCase(fetchGuestOrderAsync.fulfilled,(state,action)=>{
-            return action.payload
+export const addCareerToCart = createAsyncThunk(
+    "cart",
+    async ({quantity, userId, careerId}) => {
+        try {
+            let { data } = await axios.post(`http://localhost:8080/api/cart`, {
+                quantity,
+                userId,
+                careerId,
         });
-        builder.addCase(deleteGuestOrderAsync.fulfilled, (state,action)=>{
-            const newState = state.filter((item)=> {
-                return action.payload.some(payloadItem => payloadItem.career.id === item.career.id)
-            });
-            return newState;
-        });
-        builder.addCase(addToOrderQuantityAsync.fulfilled, (state,action)=>{
-            const newState = action.payload;
-            return newState;
-        });
-        builder.addCase(subtractFromOrderQuantityAsync.fulfilled, (state,action)=>{
-            const newState = action.payload;
-            return newState;
-        });
+        return data;
+    } catch (error) {
+        console.log(error);
     }
-})
+});
 
-export const selectCart = (state) => state.cart;
-export default cartSlice.reducer
+export const getMyCart = createAsyncThunk("myCart", async (userId) => {
+    try {
+        let { data } = await axios.get(`http://localhost:8080/api/cart/myCart`, {
+            userId,
+        });
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+    export const checkoutCart = createAsyncThunk(
+        "checkoutCart",
+        async ({id, userId, careerId, quantity, completed}) => {
+            try {
+                let { data } = await axios.put(`/api/cart/${id}`, {
+                    userId,
+                    careerId,
+                    quantity,
+                    completed,
+                });
+                return data;
+            } catch (error) {
+                console.log(error);
+            }
+        });
+
+    export const deleteCareerFromCart = createAsyncThunk(
+        "deleteCart", async ({id}) => {
+            try {
+                const { data } = await axios.delete(`/api/cart/${id}`);
+                return data;
+            } catch (error) {   
+                console.log(error);
+            }
+        });
+
+    const cartSlice = createSlice({
+        name: "cart slice",
+        initialState,
+        reducers: {
+            addToCart (state, action) {
+                state.push(action.payload);
+            },
+
+            checkoutCartSlice (state, action) {
+                return initialState;
+            }
+
+        },
+        extraReducers: (builder) => {
+            builder.addCase(addCareerToCart.fulfilled, (state, action) => {
+                return [...state, action.payload];
+            });
+            builder.addCase(getMyCart.fulfilled, (state, action) => {
+                return action.payload.map((cart) => {
+                    cart.career["quantity"] = cart.quantity;
+                    cart.career["cartId"] = cart.id;
+                    return cart.career;
+                });
+            });
+          
+            builder.addCase(checkoutCart.fulfilled, (state, action) => {
+                return initialState;
+            });
+            builder.addCase(deleteCareerFromCart.fulfilled, (state, action) => {
+                return state.filter((career) => {
+                    return career.id !== action.payload;
+                });
+            });
+        }
+    });
+
+    export const { addToCart, checkoutCartSlice } = cartSlice.actions;
+    export const selectGetCart = (state) => {
+        return state.cart;
+    };
+    export default cartSlice.reducer;

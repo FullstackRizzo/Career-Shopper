@@ -7,6 +7,7 @@ import { deleteCareerAsync, fetchCareersAsync, selectCarrers } from './viewCaree
 const ViewCareers = () => {
   const allCareers = useSelector(selectCarrers);
   const dispatch = useDispatch();
+
   useEffect(()=>{
     dispatch(fetchCareersAsync());
   },[dispatch])

@@ -1,4 +1,4 @@
-const { db, models: { User, Career, Order, OrderItems } } = require('../server/db');
+const { db, models: { User, Career, Cart } } = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });
@@ -105,29 +105,16 @@ const careers = await Promise.all([
                    quantity: 25 }),
 
 ]);
-
-const order = await Promise.all ([
-  Order.create ({
-    userId: 1, completed: false, total: 0
-  }),
+const cart = await  Promise.all([
+  Cart.create({ 
+  userId: 1, careerId: 1, quantity:1, completed: false})
 ])
+console.log(`seeded ${Cart.length} Cart`)
 
-const orderItems = await Promise.all([
-  OrderItems.create({
-    orderId: 1, careerId: 1, quantity: 1,
-  }),
-  OrderItems.create({
-    orderId: 1, careerId: 2, quantity: 1,
-  }),
-])
+  console.log(`seeded ${careers.length} products`);
 
-console.log(`seeded ${order.length} orders`);
-console.log(`seeded ${orderItems.length} orderItems`);
-console.log(`seeded ${careers.length} products`);
-
-console.log(`seeded successfully`);
-
-return {
+  console.log(`seeded successfully`);
+  return {
     users: {
       cody: users[0],
       murphy: users[1]
@@ -136,6 +123,9 @@ return {
       career1: careers[0],
       career2: careers[1]
     },
+    cart: {
+      cart1: cart[1]
+    }
     
   };
 }
