@@ -5,7 +5,7 @@ const db = require('./db')
 const User = require('./models/User')
 const Career = require('./models/Career')
 const Order = require('./models/Order')
-const OrderItems = require('./models/orderItems')
+const OrderItems = require('./models/OrderItems')
 //associations could go here!
 User.hasMany(Order)
 Order.belongsTo(User)

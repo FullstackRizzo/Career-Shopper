@@ -1,4 +1,4 @@
-const { db, models: { User, Career, Order, OrderItems} } = require('../server/db');
+const { db, models: { User, Career, Order, OrderItems } } = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });
@@ -125,8 +125,9 @@ console.log(`seeded ${order.length} orders`);
 console.log(`seeded ${orderItems.length} orderItems`);
 console.log(`seeded ${careers.length} products`);
 
-  console.log(`seeded successfully`);
-  return {
+console.log(`seeded successfully`);
+
+return {
     users: {
       cody: users[0],
       murphy: users[1]
@@ -134,7 +135,8 @@ console.log(`seeded ${careers.length} products`);
     careers: {
       career1: careers[0],
       career2: careers[1]
-    },    
+    },
+    
   };
 }
 

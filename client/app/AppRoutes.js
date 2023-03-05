@@ -9,7 +9,7 @@ import Careers from "../features/allcareers/AllCareers";
 import AboutUs from "../features/aboutus/AboutUs";
 import SingleCareer from "../features/singlecareer/singleCareer";
 import ViewCareers from "../features/adminActions/ViewCareers";
-// import Cart from "../features/cart/Cart";
+import Cart from "../features/cart/Cart";
 import SingleCareerDetails from "../features/adminActions/SingleCareerDetails";
 import ViewUsers from "../features/adminActions/ViewAllUsers";
 
@@ -57,7 +57,7 @@ const AppRoutes = () => {
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<SingleCareer />} />
             <Route path="/about" element={<AboutUs />} />
-            {/* <Route path="/cart" element={<Cart />} /> */}
+            <Route path="/cart" element={<Cart />} />
           </>
         )}
         {isAdmin && (

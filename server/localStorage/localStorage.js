@@ -1,4 +1,3 @@
-
 const CART_KEY = "cart";
 
 export const saveCartToLocalStorage = (cartData) => {
