@@ -1,7 +1,7 @@
 const router = require ('express').Router()
 
 const {
-    models: { Order }, models,
+    models: { Order },
 } = require('../db')
 
 

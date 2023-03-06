@@ -3,9 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartFromLocalStorage, saveCartToLocalStorage } from '../../../server/localStorage/localStorage';
-import { addToCart } from '../cart/orderDatabaseSlice';
-import { useSelector } from 'react-redux';
-import { addToUserCartAsync } from '../cart/cartSlice';import { addToUserCartAsync } from '../cart/cartSlice';
+import { addToUserCartAsync } from '../cart/cartSlice';
 
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
@@ -24,13 +22,12 @@ const SingleCareer = () => {
 
 
   const handleAddToCart = () => {
-    if(!isLoggedIn) {
     const cartData = getCartFromLocalStorage() || [] ;
     const cartItem = {
       career: career,
       quantity: 1,
     };
-  
+    console.log(cartData)
     const existingCartItemIndex = cartData.findIndex(item => item.career.id === career.id);
     if (existingCartItemIndex !== -1) {
       cartData[existingCartItemIndex].quantity++;
@@ -38,14 +35,7 @@ const SingleCareer = () => {
       cartData.push(cartItem);
     }
     saveCartToLocalStorage(cartData);
-      } else {addToUserCartAsync(userId, career)}
-    
-  }
-
-
-  const addToUserCart = async() =>{
-    await dispatch(addToUserCartAsync({userId, career}))
-  }
+  };
 
   const addToUserCart = async() =>{
     await dispatch(addToUserCartAsync({userId, career}))
