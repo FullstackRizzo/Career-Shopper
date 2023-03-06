@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux"
-import { addToOrderQuantityAsync, deleteGuestOrderAsync, fetchGuestOrderAsync, selectCart, subtractFromOrderQuantityAsync } from "./cartSlice";
-import { fetchOrderAsync, selectDatabaseOrder, removeFromDBQuantity, addToDBQuantity } from "./orderDatabaseSlice";
+import { addToOrderQuantityAsync, deleteGuestOrderAsync, fetchGuestOrderAsync, fetchUserOrderAsync, selectCart, subtractFromOrderQuantityAsync } from "./cartSlice";
+
 const Cart = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state)=> !!state.auth.me.id);
+  const userId = useSelector((state)=> state.auth.me.id);
   const order = useSelector(selectCart);
-  const userId = useSelector((state) => state.auth.me.id);
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  const orderDB = useSelector(selectDatabaseOrder);
- 
- useEffect(()=>{
-  dispatch(fetchOrderAsync());
-  }
-  ,[dispatch])
-
-useEffect(()=>{
+  
+  
+  useEffect(()=>{
+    if(!isLoggedIn){
     dispatch(fetchGuestOrderAsync());
+    }
+    else{
+      dispatch(fetchUserOrderAsync(userId))
+    }
   },[dispatch])
 
   const handleDelete= async(id)=>{
@@ -30,65 +30,43 @@ useEffect(()=>{
   const subtractFromOrderQuantity = async(id)=>{
     await dispatch(subtractFromOrderQuantityAsync(id));
   }
-
-  const addToDBQuantity = async()=>{
-    await dispatch(addToDBQuantity());
-  }
-
-  const removeFromDBQuantity =async()=>{
-   await dispatch(removeFromDBQuantity());
-  }
-
-  if (isLoggedIn && userId){
+  
+  if(!isLoggedIn){
     return (
       <div>
         <div id="cart-container">
           <h1>Your Cart</h1>
-          <h2>Subtotal: ${orderDB.reduce((acc, orderDB) =>{
-          acc += orderDB.cost * orderDB.order_item.quantity
-          return acc;
-          },0)}</h2>
+          <h2>Subtotal: ${order.reduce((acc, order) =>{
+            acc += order.career.cost * order.quantity
+            return acc;
+          },0).toLocaleString()}</h2>
           <div id="cart-items">
-              {orderDB.map((career) => (
-                <div key={career.id}>
-                  <img src = {career.imageUrl} />
-                  <h3> {career.name} </h3>
-                  <h4> ${career.cost} </h4>
-                   <button onClick = {removeFromDBQuantity(career.order_item.quantity)}>-</button><h4> Quantity: {order.quantity} </h4> 
-                  <button onClick = {addToDBQuantity(career.order_item.quantity)}>+</button> 
+              {order.map((order) => (
+                <div key={order.career.id}>
+                  <img src = {order.career.imageUrl} />
+                  <h3> {order.career.name} </h3>
+                  <h4> ${order.career.cost} </h4>
+                  <button onClick = {e=>{e.preventDefault; subtractFromOrderQuantity(order.career.id)}}>-</button><h4> Quantity: {order.quantity} </h4><button onClick = {e=>{e.preventDefault; addToOrderQuantity(order.career.id)}}>+</button>
+                  <button onClick = {e =>{e.preventDefault; handleDelete(order.career.id)}}> Delete </button>
                 </div>
-        ))}
+              ))}
           </div>
-      </div>
-      </div>
-    );
-    }
-  return (
-    <div>
-      <div id="cart-container">
-        <h1>Your Cart</h1>
-        <h2>Subtotal: ${order.reduce((acc, order) =>{
-          acc += order.career.cost * order.quantity
-          return acc;
-        },0).toLocaleString()}</h2>
-        <div id="cart-items">
-            {order.map((order) => (
-              <div key={order.career.id}>
-                <img src = {order.career.imageUrl} />
-                <h3> {order.career.name} </h3>
-                <h4> ${order.career.cost} </h4>
-                <button onClick = {e=>{e.preventDefault; subtractFromOrderQuantity(order.career.id)}}>-</button>
-                <h4> Quantity: {order.quantity} </h4>
-                <button onClick = {e=>{e.preventDefault; addToOrderQuantity(order.career.id)}}>+</button>
-                <button onClick = {e =>{e.preventDefault; handleDelete(order.career.id)}}> Delete </button>
-              </div>
-            ))}
+          <button> Checkout </button>
         </div>
-        <button> Checkout </button>
       </div>
-    </div>
-
     );
+  }
+  else{
+    return(
+      <div>
+        <div id ='cart-container'>
+          <h1>Your Cart</h1>
+          <h2>Subtotal: </h2>
+
+        </div>
+      </div>
+    )
+  }
 };
-// }
+
 export default Cart;
