@@ -105,7 +105,6 @@ const careers = await Promise.all([
                    quantity: 25 }),
 
 ]);
-
 console.log(`seeded ${careers.length} products`);
 
 console.log(`seeded successfully`);

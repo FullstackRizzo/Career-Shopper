@@ -60,25 +60,48 @@ export const subtractFromOrderQuantityAsync = createAsyncThunk('subtractfromOrde
     }
 })
 
-export const addToUserCartAsync = createAsyncThunk('addToUserCartAsync', async(id, career) => {
+export const addToUserCartAsync = createAsyncThunk('addToUserCartAsync', async({userId, career}) => {
     try {
-        const user = axios.get(`/api/users/${id}`)
-        const order = axios.get(`/api/orders`)
-        const orderItems = axios.get(`/api/orderitems`)
-        const hasUserOrder = order.some(item => item.order.userId === user.id) 
-        if (hasUserOrder) {
-            orderItems.push({orderId : user.orderId, careerId : career.id})
+        const userRes = await axios.get(`/api/users/${userId}`);
+        const user = userRes.data;
+
+        const ordersRes = await axios.get(`/api/orders`);
+        const orders = ordersRes.data;
+
+        const orderItemsRes = await axios.get(`/api/orderitems`);
+        const orderItems = orderItemsRes.data;
+
+        const hasUserOrder = orders.some((order) => order.userId === user.id);
+        let orderId;
+
+        if(!hasUserOrder){
+            const orderRes = await axios.post(`/api/orders`,{
+                userId: user.id
+            });
+            orderId = orderRes.data.id
         }
-        else {
-            order.push({userId : user.id})
-            orderItems.push({orderId : user.orderId, careerId : career.id})
+        else{
+            const userOrder = orders.find((order)=> order.userId === user.id);
+            orderId = userOrder.id;
         }
+
+        const existingOrderItem = orderItems.find((item) => item.orderId === orderId && item.careerId === career.id);
+        if (existingOrderItem) {
+            await axios.put(`/api/orderitems/${existingOrderItem.id}`, {
+                quantity: existingOrderItem.quantity + 1
+            });
+        } else {
+            await axios.post('/api/orderitems',{
+                orderId: orderId,
+                careerId: career.id,
+                quantity: 1
+            });
+        }
+       
     } catch(err){
         console.log(err)
       }
 })
-
-
 
 const initialState = [];
 
