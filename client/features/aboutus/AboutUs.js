@@ -1,8 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import firstImage from "../../../Images/bioPictures/firstImage.png";
 import secondImage from "../../../Images/bioPictures/secondImage.png";
 import thirdImage from "../../../Images/bioPictures/thirdImage.png";
 import fourthImage from "../../../Images/bioPictures/fourthImage.png";
+
+// const firstImage = require("firstImage.jpg");
 
 const AboutUs = () => {
   return (
