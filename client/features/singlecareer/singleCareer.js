@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { addToCart } from '../cart/cartSlice';
 import { useDispatch } from 'react-redux';
+import { getCartFromLocalStorage, saveCartToLocalStorage } from '../../../server/localStorage/localStorage';
+
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
   const { id } = useParams();
@@ -16,24 +17,39 @@ const SingleCareer = () => {
     fetchCareer();
   }, [id]);
 
-const handleAddToCart = () => {
-    dispatch(addToCart({ 
-       career: career,
-       quantity: 1 }));
+  const handleAddToCart = () => {
+    const cartData = getCartFromLocalStorage() || [] ;
+    const cartItem = {
+      career: career,
+      quantity: 1,
+    };
+    console.log(cartData)
+    const existingCartItemIndex = cartData.findIndex(item => item.career.id === career.id);
+    if (existingCartItemIndex !== -1) {
+      cartData[existingCartItemIndex].quantity++;
+    } else {
+      cartData.push(cartItem);
+    }
+    saveCartToLocalStorage(cartData);
   };
 
+
+  const buttonContent = career.quantity > 0 ? "Add to Cart" : "SOLD OUT";
+
   return (
-    <div>
-      <h1>{career.name}</h1>
-      <img src={career.imageUrl} alt={career.name} />
-      <p>{career.description}</p>
-      <p>Salary: ${career.salary}</p>
-      <p>Time of Completion: {career.timeOfCompletion} years</p>
-      <p>Cost: ${career.cost}</p>
-      <button onClick={(
-        handleAddToCart
-      )}>Add to Cart</button>
+    <div className="single-career-container">
+      <h1 className="single-career-title">{career.name}</h1>
+      <img src={career.imageUrl} alt={career.name} className="single-career-image" />
+      <p className="single-career-description">{career.description}</p>
+      <p className="single-career-salary">Salary: ${career.salary}</p>
+      <p className="single-career-time">Time of Completion: {career.timeOfCompletion} years</p>
+      <p className="single-career-cost">Cost: ${career.cost}</p>
+      <p className="single-career-quantity">Quantity: {career.quantity}</p>
+      <button onClick={handleAddToCart} disabled={career.quantity === 0} className="single-career-button">
+        {buttonContent}
+      </button>
     </div>
+
   );
 };
 

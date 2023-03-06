@@ -22,14 +22,17 @@ const Career = db.define('career', {
       type: INTEGER
     },
     imageUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING, 
       allowNull: true
     },
     category: {
       type: Sequelize.STRING,
       allowNull: false,
+    },
+    quantity: {
+      type: Sequelize.INTEGER,
+      defaultValue: 25
     }
-  });
-  
-  module.exports = Career;
-  
+});
+
+module.exports = Career;

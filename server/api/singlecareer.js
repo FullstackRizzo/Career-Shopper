@@ -24,3 +24,14 @@ router.delete('/:id', async (req,res,next)=>{
       next(err);
   }
 });
+
+router.put('/:id', async (req,res,next)=>{
+  try{
+    const career = await Career.findByPk(req.params.id);
+    res.send(await career.update(req.body))
+  }
+  catch(err){
+    next(err)
+  }
+})
+

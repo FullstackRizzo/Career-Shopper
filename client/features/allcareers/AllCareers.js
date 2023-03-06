@@ -19,7 +19,12 @@ const AllCareers = () => {
     fetchCareers();
   }, []);
 
+
   const handleSearch = (e) => {
+
+  
+const handleSearch = (e) => {
+
     const searchTerm = e.target.value.toLowerCase();
     setSearchTerm(searchTerm);
     const filtered = careers.filter((career) => {
@@ -52,6 +57,7 @@ const AllCareers = () => {
         <div className="sort-container">
           <label htmlFor="category">Filter by category:</label>
           <select id="category" value={categoryFilter} onChange={handleCategoryChange}>
+
             <option value="">All categories</option>
             {categories.map((category) => (
               <option key={category} value={category}>
@@ -61,6 +67,18 @@ const AllCareers = () => {
           </select>
         </div>
       </div>
+
+  <option value="">All categories</option>
+  {categories.map((category) => (
+    <option key={category} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
+
+  </div>
+    </div>
+
       <div className="career-list">
         {filteredCareers.map((career) => (
           <div key={career.id} className="careerBox">
@@ -72,7 +90,7 @@ const AllCareers = () => {
             </h2>
             <p>Cost: ${career.cost}</p>
           </div>
-        ))}
+         ))}
       </div>
     </div>
   );
