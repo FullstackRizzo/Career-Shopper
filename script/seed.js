@@ -106,29 +106,6 @@ const careers = await Promise.all([
 
 ]);
 
-const order = await Promise.all ([
-  Order.create ({
-    userId: 1, completed: false, total: 0
-  }),
-  Order.create ({
-    userId: 2, completed: false, total: 0
-  }),
-  Order.create ({
-    userId: 3, completed: false, total: 0
-  }),
-])
-
-const orderItems = await Promise.all([
-  OrderItems.create({
-    orderId: 1, careerId: 1, quantity: 1,
-  }),
-  OrderItems.create({
-    orderId: 1, careerId: 2, quantity: 1,
-  }),
-])
-
-console.log(`seeded ${order.length} orders`);
-console.log(`seeded ${orderItems.length} orderItems`);
 console.log(`seeded ${careers.length} products`);
 
 console.log(`seeded successfully`);
