@@ -1,0 +1,8 @@
+ background-color: #B4B4B4;
+   background-color: #7A7A7A;
+     background-color: #ddd;
+       color: white;
+
+         background-color: rgb(187, 187, 187);
+
+           background-color: rgb(95, 95, 95);

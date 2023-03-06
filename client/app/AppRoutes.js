@@ -12,6 +12,10 @@ import SingleCareer from "../features/singlecareer/singleCareer";
 
 import ViewCareers from "../features/adminActions/ViewCareers";
 import Cart from "../features/cart/Cart";
+
+import Checkout from "../features/checkout/checkout";
+
+import Contact from "../features/contact/contact";
 /**
  * COMPONENT
  */
@@ -42,6 +46,9 @@ const AppRoutes = () => {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:id" element={<SingleCareer />} />
           <Route path="/cart" element={<Cart />} />
+
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       ) : (
         <Routes>
@@ -52,7 +59,9 @@ const AppRoutes = () => {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:id" element={<SingleCareer />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/cart" element={<Cart />} /> 
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       )}
     </div>
