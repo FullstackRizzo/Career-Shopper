@@ -1,7 +1,7 @@
 const router = require ('express').Router()
 
 const {
-    models: { Order },
+    models: { Order }, models,
 } = require('../db')
 
 
@@ -14,4 +14,4 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
+module.exports = router

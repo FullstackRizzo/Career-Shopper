@@ -60,6 +60,26 @@ export const subtractFromOrderQuantityAsync = createAsyncThunk('subtractfromOrde
     }
 })
 
+export const addToUserCartAsync = createAsyncThunk('addToUserCartAsync', async(id, career) => {
+    try {
+        const user = axios.get(`/api/users/${id}`)
+        const order = axios.get(`/api/orders`)
+        const orderItems = axios.get(`/api/orderitems`)
+        const hasUserOrder = order.some(item => item.order.userId === user.id) 
+        if (hasUserOrder) {
+            orderItems.push({orderId : user.orderId, careerId : career.id})
+        }
+        else {
+            order.push({userId : user.id})
+            orderItems.push({orderId : user.orderId, careerId : career.id})
+        }
+    } catch(err){
+        console.log(err)
+      }
+})
+
+
+
 const initialState = [];
 
 const cartSlice = createSlice({

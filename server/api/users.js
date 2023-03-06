@@ -16,6 +16,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    const order = await Order.findAll()
+    res.send(user)
+  } catch (err) {
+    next(err)
+    }
+});
+
 router.get("/:userId/orders", async (req, res, next) => {
   try {
       const user = await User.findByPk(req.params.userId);
@@ -29,6 +39,37 @@ router.get("/:userId/orders", async (req, res, next) => {
           include:  [{model: Career, through: OrderItems}]
       });
       res.send(orders);
+  } catch (err) {
+      next(err);
+  }
+});
+
+router.get("/:userId/orders/:orderId", async (req, res, next) => {
+  try {
+      const user = await User.findByPk(req.params.userId);
+      if (!user) {
+          return res.status(404).json({ message: "user not found" });
+      }
+      const order = await Order.findByPk(req.params.orderId, {
+          include:  [{model: Career, through: OrderItems}]
+      });
+      res.send(order);
+  } catch (err) {
+      next(err);
+  }
+}
+);
+
+router.post("/:userId/orders", async (req, res, next) => {
+  try {
+      const user = await User.findByPk(req.params.userId);
+      if (!user) {
+          return res.status(404).json({ message: "user not found" });
+      }
+      const order = await Order.create({
+          include : [{model: Career, through: OrderItems}]
+      });
+      res.send(order);
   } catch (err) {
       next(err);
   }

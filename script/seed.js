@@ -110,6 +110,12 @@ const order = await Promise.all ([
   Order.create ({
     userId: 1, completed: false, total: 0
   }),
+  Order.create ({
+    userId: 2, completed: false, total: 0
+  }),
+  Order.create ({
+    userId: 3, completed: false, total: 0
+  }),
 ])
 
 const orderItems = await Promise.all([
