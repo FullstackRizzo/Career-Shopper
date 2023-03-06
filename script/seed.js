@@ -1,4 +1,4 @@
-const { db, models: { User, Career, Order, OrderItems } } = require('../server/db');
+const { db, models: { User, Career,} } = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });

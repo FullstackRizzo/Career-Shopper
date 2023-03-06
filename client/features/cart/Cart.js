@@ -8,16 +8,13 @@ const Cart = () => {
   const order = useSelector(selectCart);
   const userId = useSelector((state) => state.auth.me.id);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
- const orderDB = useSelector(selectDatabaseOrder);
+  const orderDB = useSelector(selectDatabaseOrder);
  
  useEffect(()=>{
   dispatch(fetchOrderAsync());
   }
   ,[dispatch])
 
-console.log (orderDB, 'orderDB');
-console.log (order, 'order');
-console.log (userId, 'userId');
 useEffect(()=>{
     dispatch(fetchGuestOrderAsync());
   },[dispatch])
@@ -34,13 +31,13 @@ useEffect(()=>{
     await dispatch(subtractFromOrderQuantityAsync(id));
   }
 
-  // const addToDBQuantity = async()=>{
-  //   dispatch(addToDBQuantity());
-  // }
+  const addToDBQuantity = async()=>{
+    await dispatch(addToDBQuantity());
+  }
 
-  // const removeFromDBQuantity =()=>{
-  // dispatch(removeFromDBQuantity());
-  // }
+  const removeFromDBQuantity =async()=>{
+   await dispatch(removeFromDBQuantity());
+  }
 
   if (isLoggedIn && userId){
     return (
@@ -57,9 +54,8 @@ useEffect(()=>{
                   <img src = {career.imageUrl} />
                   <h3> {career.name} </h3>
                   <h4> ${career.cost} </h4>
-                  {/* <button onClick = {removeFromDBQuantity(career.order_item.quantity)}>-</button><h4> Quantity: {order.quantity} </h4>
-                  <button onClick = {addToDBQuantity(career.order_item.quantity)}>+</button> */}
-                {/* <button onClick = {handleDelete(orderDB.career)}> Delete </button> */}
+                   <button onClick = {removeFromDBQuantity(career.order_item.quantity)}>-</button><h4> Quantity: {order.quantity} </h4> 
+                  <button onClick = {addToDBQuantity(career.order_item.quantity)}>+</button> 
                 </div>
         ))}
           </div>

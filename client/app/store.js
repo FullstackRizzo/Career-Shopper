@@ -13,7 +13,7 @@ const store = configureStore({
     singleCareerDetails: singleCareerDetailsSlice,
     cart: cartSlice,
     viewAllUsers: viewAllUsersSlice,
-    order: orderDBSlice
+    order: orderDBSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
