@@ -10,8 +10,15 @@ import AboutUs from "../features/aboutus/AboutUs";
 import SingleCareer from "../features/singlecareer/singleCareer";
 import ViewCareers from "../features/adminActions/ViewCareers";
 import Cart from "../features/cart/Cart";
+
+
+import Checkout from "../features/checkout/checkout";
+
+import Contact from "../features/contact/contact";
+
 import SingleCareerDetails from "../features/adminActions/SingleCareerDetails";
 import ViewUsers from "../features/adminActions/ViewAllUsers";
+
 
 /**
  * COMPONENT
@@ -28,6 +35,42 @@ const AppRoutes = () => {
 
   return (
     <div>
+
+      {isLoggedIn ? (
+        <Routes>
+          <Route path="/about" element={<AboutUs />} />
+
+          <Route path="/" element={<Homepage />} />
+          <Route path="/*" element={<Account />} />
+          <Route to="/account" element={<Account />} />
+
+          <Route path="/viewcareers" element={<ViewCareers />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/*" element={<Account />} />
+          <Route to="/account" element={<Account />} />
+
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:id" element={<SingleCareer />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/*" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:id" element={<SingleCareer />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      )}
+
       <Routes>
         <Route path="/about" element={<AboutUs />} />
         <Route path="/" element={<Homepage />} />
@@ -69,6 +112,7 @@ const AppRoutes = () => {
           </>
         )}
       </Routes>
+
     </div>
   );
 };
