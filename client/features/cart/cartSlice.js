@@ -85,19 +85,18 @@ export const addToUserCartAsync = createAsyncThunk('addToUserCartAsync', async({
             orderId = userOrder.id;
         }
 
-        // const existingOrderItem = orderItems.find((item) => item.orderId === orderId && item.careerId === career.id);
-        // console.log(existingOrderItem)
-        // if (existingOrderItem) {
-        //     await axios.put(`/api/orderitems/${existingOrderItem.id}`, {
-        //         quantity: existingOrderItem.quantity + 1
-        //     });
-        // } else {
-        //     await axios.post('/api/orderitems',{
-        //         orderId: orderId,
-        //         careerId: career.id,
-        //         quantity: 1
-        //     });
-        // }
+        const existingOrderItem = orderItems.find((item) => item.orderId === orderId && item.careerId === career.id);
+        if (existingOrderItem) {
+            await axios.put(`/api/orderitems/${existingOrderItem.id}`, {
+                quantity: existingOrderItem.quantity + 1
+            });
+        } else {
+            await axios.post('/api/orderitems',{
+                orderId: orderId,
+                careerId: career.id,
+                quantity: 1
+            });
+        }
        
     } catch(err){
         console.log(err)
