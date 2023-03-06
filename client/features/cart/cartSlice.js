@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createNextState} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getCartFromLocalStorage, saveCartToLocalStorage } from '../../../server/localStorage/localStorage';
 
@@ -9,6 +9,16 @@ export const fetchGuestOrderAsync = createAsyncThunk('guestOrder', async()=>{
     }
     catch(err){
         console.log(err);
+    }
+})
+
+export const fetchUserOrderAsync = createAsyncThunk('userOrder', async(userId)=>{
+    try{
+        const {data} = await axios.get(`/api/users/${userId}/orders`)
+        return data;
+    }
+    catch(err){
+        next(err)
     }
 })
 
@@ -90,12 +100,18 @@ export const addToUserCartAsync = createAsyncThunk('addToUserCartAsync', async({
             await axios.put(`/api/orderitems/${existingOrderItem.id}`, {
                 quantity: existingOrderItem.quantity + 1
             });
+            const order = await axios.get(`/api/orders/${orderId}`);
+            const updatedTotal = order.data.total + career.cost;
+            await axios.put(`/api/orders/${orderId}`, { total: updatedTotal });
         } else {
             await axios.post('/api/orderitems',{
                 orderId: orderId,
                 careerId: career.id,
                 quantity: 1
             });
+            const order = await axios.get(`/api/orders/${orderId}`);
+            const updatedTotal = order.data.total + career.cost;
+            await axios.put(`/api/orders/${orderId}`, { total: updatedTotal });
         }
        
     } catch(err){
@@ -111,6 +127,9 @@ const cartSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder.addCase(fetchGuestOrderAsync.fulfilled,(state,action)=>{
+            return action.payload
+        });
+        builder.addCase(fetchUserOrderAsync.fulfilled, (state,action)=>{
             return action.payload
         });
         builder.addCase(deleteGuestOrderAsync.fulfilled, (state,action)=>{
