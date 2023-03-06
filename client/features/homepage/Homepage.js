@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Homepage = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   return (
-    <div id="homepage-container">
+    <div class="homepage-container">
       <h1 className="underline pageHeading">LOOKING FOR A CAREER?</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate } from '../../app/store';
-import { Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../../app/store";
+import { Link, useNavigate } from "react-router-dom";
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -20,16 +20,20 @@ const AuthForm = ({ name, displayName }) => {
     const username = evt.target.username.value;
     const password = evt.target.password.value;
     dispatch(authenticate({ username, password, method: formName }));
-    navigate('/account')
+    navigate("/account");
   };
 
   return (
     <div>
-      <div className = 'form-nav-container'>
-      <h1><Link to = '/login'>LOGIN</Link></h1>
-      <h1><Link to = '/signup'>SIGN UP</Link></h1>
+      <div className="form-nav-container">
+        <h1>
+          <Link to="/login">LOGIN</Link>
+        </h1>
+        <h1>
+          <Link to="/signup">SIGN UP</Link>
+        </h1>
       </div>
-      <form onSubmit={handleSubmit} id = 'form'className ={name} name={name}>
+      <form onSubmit={handleSubmit} id="form" className={name} name={name}>
         <div>
           <label htmlFor="username">
             <small>Username:</small>

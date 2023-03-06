@@ -9,7 +9,7 @@ import fourthImage from "../../../Images/bioPictures/fourthImage.png";
 
 const AboutUs = () => {
   return (
-    <div id="homepage-container">
+    <div class="homepage-container">
       <h1>Our Mission</h1>
       <p>To provide burgeoning new professionals with a comprehensive and easy to understand list of career paths</p>
       <h1>About</h1>
