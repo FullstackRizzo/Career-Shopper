@@ -1,4 +1,5 @@
-const { db, models: { User, Career, Order, OrderItems } } = require('../server/db');
+const { db, models: { User, Career} } = require('../server/db');
+const Order = require('../server/db/models/Order');
 
 async function seed() {
   await db.sync({ force: true });
@@ -105,8 +106,8 @@ const careers = await Promise.all([
                    quantity: 25 }),
 
 ]);
-console.log(`seeded ${careers.length} products`);
 
+console.log(`seeded ${careers.length} products`);
 console.log(`seeded successfully`);
 
 return {

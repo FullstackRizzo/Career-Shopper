@@ -50,6 +50,12 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+            <Link to="/cart" className="navLink">
+              <span role="img" aria-label="cart">
+                🛒
+              </span>
+              {/* {cart.length > 0 && <span className="cartCount">{cart.length}</span>} */}
+            </Link>
             <Link to="/login" className="navLink">
               Login
             </Link>

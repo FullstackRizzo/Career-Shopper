@@ -34,7 +34,7 @@ const SingleCareer = () => {
     } else {
       cartData.push(cartItem);
     }
-    saveCartToLocalStorage(cartData);
+    saveCartToLocalStorage(cartData)
   };
 
   const addToUserCart = async() =>{

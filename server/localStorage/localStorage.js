@@ -6,9 +6,14 @@ export const saveCartToLocalStorage = (cartData) => {
 
 export const getCartFromLocalStorage = () => {
   const cartData = localStorage.getItem(CART_KEY);
+
   if (cartData) {
     return JSON.parse(cartData);
   } else {
     return null;
   }
 };
+
+
+
+
