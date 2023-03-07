@@ -11,6 +11,9 @@ User.hasMany(Order)
 Order.belongsTo(User)
 Order.belongsToMany(Career, {through: OrderItems})
 Career.belongsToMany(Order, {through: OrderItems})
+Order.hasMany(OrderItems);
+OrderItems.belongsTo(Order)
+OrderItems.belongsTo(Career)
 
 module.exports = {
   db,

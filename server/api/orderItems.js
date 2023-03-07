@@ -1,11 +1,40 @@
 const router = require('express').Router()
 const {models : {OrderItems}} = require('../db') 
+const Career = require('../db/models/Career')
 
 router.get('/', async (req, res, next) => {
     try { 
         const orderItems = await OrderItems.findAll()
         res.send(orderItems)
     } catch (err) {
+        next(err)
+    }
+})
+
+router.get('/:id', async(req, res, next)=>{
+    try{
+        const orderItems = await OrderItems.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Career
+                }
+            ]
+        })
+        return res.send(orderItems)
+    }
+    catch(err){
+        next(err)
+    }
+})
+
+
+router.delete('/:id', async (req,res,next)=>{
+    try{
+        const orderItems = await OrderItems.findByPk(req.params.id);
+        await orderItems.destroy();
+        res.send(orderItems);
+    }
+    catch(err){
         next(err)
     }
 })
@@ -22,13 +51,8 @@ router.post('/', async (req,res,next)=>{
 router.put('/:id', async (req, res, next) => {
     const { quantity } = req.body;
     const { id } = req.params;
-    
     try {
-      const orderItem = await OrderItems.findByPk(id);
-      
-      if (!orderItem) {
-        return res.status(404).send({ error: 'Order item not found' });
-      }
+      const orderItem = await OrderItems.findByPk(id)
   
       const updatedOrderItem = await orderItem.update({ quantity });
       
