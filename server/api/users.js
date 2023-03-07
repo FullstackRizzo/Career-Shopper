@@ -31,17 +31,23 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.get("/:userId/orders", async (req, res, next) => {
+router.get("/:userId/activeorder", async (req, res, next) => {
   try {
       const user = await User.findByPk(req.params.userId);
       if (!user) {
           return res.status(404).json({ message: "User not found" });
       }
-      const orders = await Order.findAll({
+      const orders = await Order.findOne({
           where: {
-              userId: req.params.userId
+              userId: req.params.userId,
+              completed: false
           },
-          include:  [{model: Career, through: OrderItems}]
+          include:  [
+              {
+                  model: OrderItems,
+                  include: [Career]
+              }
+          ]
       });
       res.send(orders);
   } catch (err) {
@@ -49,33 +55,3 @@ router.get("/:userId/orders", async (req, res, next) => {
   }
 });
 
-router.get("/:userId/orders/:orderId", async (req, res, next) => {
-  try {
-      const user = await User.findByPk(req.params.userId);
-      if (!user) {
-          return res.status(404).json({ message: "user not found" });
-      }
-      const order = await Order.findByPk(req.params.orderId, {
-          include:  [{model: Career, through: OrderItems}]
-      });
-      res.send(order);
-  } catch (err) {
-      next(err);
-  }
-}
-);
-
-router.post("/:userId/orders", async (req, res, next) => {
-  try {
-      const user = await User.findByPk(req.params.userId);
-      if (!user) {
-          return res.status(404).json({ message: "user not found" });
-      }
-      const order = await Order.create({
-          include : [{model: Career, through: OrderItems}]
-      });
-      res.send(order);
-  } catch (err) {
-      next(err);
-  }
-});
