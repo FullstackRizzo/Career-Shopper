@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux"
 import { addToOrderQuantityAsync, deleteGuestOrderAsync, fetchGuestOrderAsync, selectCart, subtractFromOrderQuantityAsync } from "./cartSlice";
 import { addToUserOrderQuantityAsync, deleteUserOrderAsync, fetchUserOrderAsync, selectUserCart, subtractFromUserOrderQuantityAsync } from "./userCartSlice";
-
 const Cart = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state)=> !!state.auth.me.id);
@@ -11,7 +10,6 @@ const Cart = () => {
   const userOrder = useSelector(selectUserCart);
   const guestOrder = useSelector(selectCart)
   const {order_items} = userOrder
-  
   
   useEffect(()=>{
     if(!isLoggedIn){
@@ -65,7 +63,8 @@ const Cart = () => {
                 </div>
               ))}
           </div>
-          <button> Checkout </button>
+          <button>Checkout </button>
+
         </div>
       </div>
     );
@@ -79,7 +78,7 @@ const Cart = () => {
           <div id = 'cart-items'>
             {order_items ? order_items.map((order)=>(
               <div key= {order.id}>
-                <img src = {order.career.imageUrl} />
+                <img style = {{width: 100, height: 100}} src = {order.career.imageUrl} />
                   <h3> {order.career.name} </h3>
                   <h4> ${order.career.cost} </h4>
                   <button onClick = {e=>{e.preventDefault; subtractFromUserOrderQuantity(order.id)}}>-</button><h4> Quantity: {order.quantity} </h4> <button onClick={e=>{e.preventDefault; addToUserOrderQuantity(order.id)}}>+</button>

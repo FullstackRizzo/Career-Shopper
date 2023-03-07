@@ -16,12 +16,12 @@ const Homepage = () => {
       </p>
       <h1 className="underline pageHeading">Careers</h1>
       <div id="homepageBodyLinkSection">
-        <Link to="">Doctor</Link>
-        <Link to="">Auto Mechanic</Link>
-        <Link to="">Developer</Link>
-        <Link to="">Locksmith</Link>
-        <Link to="">Nurse</Link>
-        <Link to="">Plumber</Link>
+        <Link to="/careers/1">Doctor</Link>
+        <Link to="/careers/8">Auto Mechanic</Link>
+        <Link to="/careers/3">Engineer</Link>
+        <Link to="/careers/6">Teacher</Link>
+        <Link to="/careers/7">Nurse</Link>
+        <Link to="/careers/10">Psycologist</Link>
       </div>
     </div>
   );

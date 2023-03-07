@@ -12,7 +12,7 @@ import ViewCareers from "../features/adminActions/ViewCareers";
 import Cart from "../features/cart/Cart";
 import SingleCareerDetails from "../features/adminActions/SingleCareerDetails";
 import ViewUsers from "../features/adminActions/ViewAllUsers";
-
+import OrderHistory from "../features/OrderHistory/orderhistory";
 /**
  * COMPONENT
  */
@@ -49,6 +49,7 @@ const AppRoutes = () => {
             <Route path="/careers/:id" element={<SingleCareer />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orderhistory" element={<OrderHistory />} />
           </>
         )}
         {(isLoggedIn || isAdmin) && (
@@ -59,6 +60,7 @@ const AppRoutes = () => {
             <Route path="/careers/:id" element={<SingleCareer />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orderhistory" element={<OrderHistory />} />
           </>
         )}
         {isAdmin && (

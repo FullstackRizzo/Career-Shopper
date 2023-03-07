@@ -6,6 +6,18 @@ const {
 const Career = require('../db/models/Career');
 const OrderItems = require('../db/models/OrderItems');
 
+router.get('/completed', async (req, res, next) => {
+    try {
+        const order = await Order.findAll({
+            where: {
+                completed: true,
+            },
+        });
+        res.json(order);
+    } catch (err) {
+        next(err);
+    }
+});
 
 router.get('/', async (req, res, next) => {
     try {
@@ -56,7 +68,5 @@ router.put('/:id', async(req, res, next) => {
       next(error);
     }
 });
-
-
 
 module.exports = router;

@@ -1,3 +1,0 @@
-When the StripeCheckoutButton component is rendered, it displays a button labeled "Pay Now". When the user clicks the button, a Stripe Checkout modal is displayed, which allows the user to enter their payment information and complete the payment process. The StripeCheckout component is configured with various props, including the name and description of the payment, the amount to charge, and the stripeKey to use for the payment.
-
-When the payment is successful, the onToken callback function is called with a token object that contains information about the payment. In this code, the onToken function logs the token object to the console and displays an alert to the user indicating that the payment was successful
