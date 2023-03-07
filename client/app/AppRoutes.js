@@ -42,6 +42,8 @@ const AppRoutes = () => {
             <Route path="/careers/:id" element={<SingleCareer />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
+
           </>
         )}
         {(isLoggedIn || isAdmin) && (

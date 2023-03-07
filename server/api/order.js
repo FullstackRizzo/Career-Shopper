@@ -2,7 +2,9 @@ const router = require ('express').Router()
 
 const {
     models: { Order },
-} = require('../db')
+} = require('../db');
+const Career = require('../db/models/Career');
+const OrderItems = require('../db/models/OrderItems');
 
 
 router.get('/', async (req, res, next) => {
@@ -25,7 +27,14 @@ router.post('/', async (req,res,next)=>{
 
 router.get('/:id', async(req,res,next)=>{
     try{
-        const order = await Order.findByPk(req.params.id);
+        const order = await Order.findByPk(req.params.id, {
+            include: [
+                {
+                    model: OrderItems,
+                    include:[{model: Career}],
+                }
+            ],
+        });
         res.send(order)
     }
     catch(err){

@@ -363,3 +363,77 @@ form div {
 .single-career-button:hover:not(:disabled) {
   background-color: #0069d9;
 }
+
+@media (max-width: 768px) { /* Add media query for mobile screens */
+  #hamburger-icon {
+    display: block; /* Show the hamburger icon on mobile screens */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  #hamburger-icon span {
+    display: block;
+    height: 3px;
+    background-color: #333;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  #hamburger-icon span:nth-child(2) {
+    width: 80%;
+  }
+
+  #hamburger-icon span:nth-child(3) {
+    width: 60%;
+  }
+
+
+  /* Hamburger menu links */
+
+  #hamburgerLinks {
+    display: none;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    height: 100vh;
+    width: 25vw;
+    background-color: #fff;
+    padding: 60px 20px 20px;
+    z-index: 9998;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  #hamburgerLinks.active {
+    display: block;
+  }
+
+  #hamburgerLinksTopSection a {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    background-color: rgb(241, 240, 240);
+    border-radius: 10px;
+  }
+
+  #hamburgerLinksBottomSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  #hamburgerLinksBottomSection a {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #999;
+    text-decoration: none;
+  }
+}
