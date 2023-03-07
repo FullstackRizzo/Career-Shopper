@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartFromLocalStorage, saveCartToLocalStorage } from '../../../server/localStorage/localStorage';
-import { addToUserCartAsync } from '../cart/cartSlice';
+import { addToUserCartAsync } from '../cart/userCartSlice';
 
 const SingleCareer = () => {
   const [career, setCareer] = useState({});
