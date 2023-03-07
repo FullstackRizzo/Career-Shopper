@@ -6,7 +6,7 @@ const OrderHistory = () => {
     const orderHistory = useSelector(selectOrderHistory);
     return(
         <div> 
-            <h1>Order History</h1>
+            <h1>Order History"</h1>
             <p>Issues with a past order? please contact us at careershopper@gmail.com</p>
             <div>
                 {orderHistory ? orderHistory.map((order) => {
