@@ -43,7 +43,7 @@ const Cart = () => {
           <div id="cart-items">
               {order.map((order) => (
                 <div key={order.career.id}>
-                  <img src = {order.career.imageUrl} />
+                  <img style = {{width: 100, height: 100}} src = {order.career.imageUrl } />
                   <h3> {order.career.name} </h3>
                   <h4> ${order.career.cost} </h4>
                   <button onClick = {e=>{e.preventDefault; subtractFromOrderQuantity(order.career.id)}}>-</button><h4> Quantity: {order.quantity} </h4><button onClick = {e=>{e.preventDefault; addToOrderQuantity(order.career.id)}}>+</button>
