@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import { useDispatch } from "react-redux"
 import { addToOrderQuantityAsync, deleteGuestOrderAsync, fetchGuestOrderAsync, selectCart, subtractFromOrderQuantityAsync } from "./cartSlice";
 import { addToUserOrderQuantityAsync, deleteUserOrderAsync, fetchUserOrderAsync, selectUserCart, subtractFromUserOrderQuantityAsync } from "./userCartSlice";
@@ -18,19 +19,20 @@ const Cart = () => {
     else{
       dispatch(fetchUserOrderAsync(userId))
     }
-  },[dispatch])
+  }, [dispatch]);
 
-  const handleDelete= async(id)=>{
+  const handleDelete = async (id) => {
     await dispatch(deleteGuestOrderAsync(id));
-  }
+  };
 
-  const addToOrderQuantity = async(id)=>{
+  const addToOrderQuantity = async (id) => {
     await dispatch(addToOrderQuantityAsync(id));
-  }
+  };
 
-  const subtractFromOrderQuantity = async(id)=>{
+  const subtractFromOrderQuantity = async (id) => {
     await dispatch(subtractFromOrderQuantityAsync(id));
-  }
+  };
+
 
   const deleteFromUserCart = async(id)=>{
     await dispatch(deleteUserOrderAsync(id))
@@ -45,7 +47,7 @@ const Cart = () => {
   }
   if(!isLoggedIn){
     return (
-      <div>
+      <div class="homepage-container">
         <div id="cart-container">
           <h1>Your Cart</h1>
           <h2>Subtotal: ${guestOrder? guestOrder.reduce((acc, order) =>{
@@ -69,11 +71,10 @@ const Cart = () => {
         </div>
       </div>
     );
-  }
-  else{
-    return(
-      <div>
-        <div id ='cart-container'>
+  } else {
+    return (
+      <div class="homepage-container">
+        <div id="cart-container">
           <h1>Your Cart</h1>
           <h2>Subtotal: ${userOrder.total}</h2>
           <div id = 'cart-items'>
@@ -91,7 +92,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 };
 

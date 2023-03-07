@@ -13,6 +13,9 @@ import Cart from "../features/cart/Cart";
 import SingleCareerDetails from "../features/adminActions/SingleCareerDetails";
 import ViewUsers from "../features/adminActions/ViewAllUsers";
 import OrderHistory from "../features/OrderHistory/orderhistory";
+import Contact from "../features/contact/contact";
+
+
 /**
  * COMPONENT
  */
@@ -31,23 +34,16 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/about" element={<AboutUs />} />
         <Route path="/" element={<Homepage />} />
+        <Route path="/contact" element={<Contact />} />
         {!isLoggedIn && (
           <>
-            <Route
-              path="/*"
-              element={<AuthForm name="login" displayName="Login" />}
-            />
-            <Route
-              path="/login"
-              element={<AuthForm name="login" displayName="Login" />}
-            />
-            <Route
-              path="/signup"
-              element={<AuthForm name="signup" displayName="Sign Up" />}
-            />
+            <Route path="/*" element={<AuthForm name="login" displayName="Login" />} />
+            <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+            <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<SingleCareer />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orderhistory" element={<OrderHistory />} />
           </>
@@ -61,14 +57,16 @@ const AppRoutes = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orderhistory" element={<OrderHistory />} />
+            <Route path="/contact" element={<Contact />} />
           </>
         )}
         {isAdmin && (
           <>
             <Route path="/*" element={<Account />} />
             <Route path="/viewcareers" element={<ViewCareers />} />
-            <Route path="/singlecareerview/:id" element = {<SingleCareerDetails/>}/>
+            <Route path="/singlecareerview/:id" element={<SingleCareerDetails />} />
             <Route path="/viewallusers" element={<ViewUsers />} />
+            <Route path="/contact" element={<Contact />} />
           </>
         )}
       </Routes>

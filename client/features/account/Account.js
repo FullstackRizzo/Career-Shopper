@@ -1,15 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 /**
  * COMPONENT
  */
 const Account = (props) => {
   const username = useSelector((state) => state.auth.me.username);
-  const isAdmin = useSelector((state) => state.auth.me.admin)
+  const isAdmin = useSelector((state) => state.auth.me.admin);
 
   return (
-    <div>
+    <div class="homepage-container">
       <h1>Welcome, {username}</h1>
       {isAdmin ?(<div className='admin-options'>
         <h3><Link to = '/viewcareers'>View Careers</Link></h3>
