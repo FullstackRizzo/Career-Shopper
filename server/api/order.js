@@ -8,12 +8,12 @@ const OrderItems = require('../db/models/OrderItems');
 
 router.get('/completed', async (req, res, next) => {
     try {
-        const order = await Order.findAll({
+        const orderHistory = await Order.findAll({
             where: {
                 completed: true,
             },
         });
-        res.json(order);
+        res.json(orderHistory);
     } catch (err) {
         next(err);
     }

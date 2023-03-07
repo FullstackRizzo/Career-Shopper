@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const initialState = [];
 
-export const getMyOrders = createAsyncThunk('myOrders', async () => {
+export const getOrderHistory = createAsyncThunk('myOrders', async () => {
  try {
-    let {data} = await axios.get(`/api/orderhistory`);
+    let {data} = await axios.get(`/api/orders/completed`);
     return data;
  }
     catch (err) {
@@ -18,7 +18,7 @@ const orderHistorySlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getMyOrders.fulfilled, (state, action) => {
+        builder.addCase(getOrderHistory.fulfilled, (state, action) => {
             return action.payload;
         });
     }
